@@ -1,0 +1,123 @@
+:root {
+    --primary-btn-bg-color: #212222;
+    --primary-btn-hover-color: #4c5052;
+    --primary-btn-color: #ffffff;
+    --border-radius: 0.1rem;
+    --light-gray1-color: #b1b1b1;
+}
+
+html,
+body {
+    color: #414141;
+    letter-spacing: 0.01rem;
+}
+a:active, a:focus {
+   background-color: unset !important ; 
+}
+/*
+-------------------------------------
+    Global Button Styles
+-------------------------------------
+*/
+.btn-primary {
+    color: var(--primary-btn-color);
+    background-color: var(--primary-btn-bg-color);
+    border: 1px solid var(--primary-btn-bg-color);
+    border-radius: var(--border-radius);
+}
+
+.btn-primary:hover {
+    color: var(--primary-btn-color);
+    background-color: var(--primary-btn-hover-color);
+    border: 1px solid var(--primary-btn-hover-color);
+    border-radius: var(--border-radius);
+}
+
+.btn-primary.flexible {
+    width: 100%;
+}
+
+/* Navigation Styles */
+.navbar-brand {
+    padding: 0rem 2rem;
+}
+
+.navbar-brand img{
+    display: block;
+    width: 2rem;
+    height: 2rem;
+}
+
+.navbar .avatar-icon {
+    opacity: 0.7;
+}
+
+.navbar .nav-link {
+    border-bottom: 2px solid transparent;
+    border-radius: 0.1rem;
+    cursor: pointer !important;
+    padding: 0.4rem 1rem !important;
+}
+
+.navbar .nav-link:focus {
+    background-color: transparent;
+}
+
+.navbar .nav-link:hover {
+    border-color: #cdcdcd;
+}
+
+.navbar .nav-link.active {
+    border-color: #575757;
+}
+.dropdown-toggle::after {
+    color: #575757;
+}
+
+.profile-block {
+    margin-right: 1.5rem;
+}
+
+.user-greeting {
+    font-style: normal;
+    text-decoration: none;
+    color: #575757;
+    font-weight: 300;
+    font-size: 0.9rem;
+}
+/*
+End Button Styles
+-------------------------------------
+*/
+
+
+/*
+-------------------------------------
+    Global TextInput Styles
+-------------------------------------
+*/
+form input {
+    border-radius: var(--border-radius) !important;
+}
+/*
+End Button Styles
+-------------------------------------
+*/
+
+.alert {
+    padding: 0.2rem 1rem;
+    border-radius: 0.2rem;
+}
+
+.footer {
+    display: block;
+    text-align: center;
+    color: var(--light-gray1-color);
+    position: absolute;
+    bottom: 0rem;
+    left: 0rem;
+    right: 0rem;
+    padding: 0.5rem 2rem;
+    font-weight: 300;
+    font-size: 0.8rem;
+}
