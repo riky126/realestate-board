@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="MySql" id="Project_8ef" database="MySql" >
+	<schema name="realestate_board" >
+		<table name="accounts" >
+			<column name="id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="number" type="int" jt="4" mandatory="y" />
+			<column name="active" type="bit" jt="-7" >
+				<defo>0</defo>
+			</column>
+			<column name="date_created" type="date" jt="91" />
+			<index name="pk_account_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_accounts_subscriptions" to_schema="realestate_board" to_table="subscriptions" >
+				<fk_column name="id" pk="account_id" />
+			</fk>
+			<fk name="fk_accounts_proprietors" to_schema="realestate_board" to_table="proprietors" >
+				<fk_column name="id" pk="account_id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="aging_reports" >
+			<column name="id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<index name="pk_aging_report_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="collections" >
+			<column name="id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="amount" type="decimal" jt="3" />
+			<column name="date_collected" type="date" jt="91" />
+			<column name="account_id" type="int" jt="4" />
+			<index name="pk_collection_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_collections_accounts" to_schema="realestate_board" to_table="accounts" >
+				<fk_column name="account_id" pk="id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="financial_statements" >
+			<column name="id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<index name="pk_financial_statement_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="plan" >
+			<column name="id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="plan_name" type="varchar" length="100" jt="12" />
+			<column name="price" type="decimal" jt="3" />
+			<index name="pk_plan_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="plans" >
+			<column name="id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="price" type="decimal" jt="3" />
+			<column name="plan_name" type="varchar" length="100" jt="12" />
+			<index name="pk_plans_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_plans_subscriptions" to_schema="realestate_board" to_table="subscriptions" >
+				<fk_column name="id" pk="account_id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="proprietors" >
+			<column name="id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="first_name" type="varchar" length="128" jt="12" />
+			<column name="last_name" type="varchar" length="128" jt="12" />
+			<column name="email" type="varchar" length="255" jt="12" />
+			<column name="unit_entitlement" type="int" jt="4" />
+			<column name="postal_address" type="varchar" length="255" jt="12" />
+			<column name="date_created" type="date" jt="91" />
+			<column name="user_id" type="int" jt="4" />
+			<column name="account_id" type="int" jt="4" />
+			<index name="pk_proprietor_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="unq_proprietors_user_id" unique="UNIQUE_CONSTRAINT" >
+				<column name="user_id" />
+			</index>
+			<index name="unq_proprietors_account_id" unique="UNIQUE_CONSTRAINT" >
+				<column name="account_id" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="receipts" >
+			<column name="id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="account_id" type="int" jt="4" />
+			<index name="pk_receipt_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_receipts_accounts" to_schema="realestate_board" to_table="accounts" >
+				<fk_column name="account_id" pk="id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="subscriptions" >
+			<column name="id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="account_id" type="int" jt="4" />
+			<column name="date_created" type="date" jt="91" />
+			<column name="plan_id" type="int" jt="4" />
+			<column name="start_date" type="date" jt="91" />
+			<column name="end_date" type="date" jt="91" />
+			<index name="pk_subscription_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="unq_subscriptions_account_id" unique="UNIQUE_CONSTRAINT" >
+				<column name="account_id" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="users" >
+			<column name="id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="email" type="varchar" length="255" jt="12" mandatory="y" />
+			<column name="password" type="varchar" length="255" jt="12" mandatory="y" />
+			<column name="date_created" type="date" jt="91" />
+			<column name="date_updated" type="date" jt="91" />
+			<index name="pk_users_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_users_proprietors" to_schema="realestate_board" to_table="proprietors" >
+				<fk_column name="id" pk="user_id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+	</schema>
+	<connector name="MySql" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-8.0.19.jar" driver_desc="Standard" host="localhost" port="3306" instance="realestate_board" user="docker" passwd="ZG9ja2Vy" />
+	<layout name="Default Layout" id="Layout_1f15" show_relation="columns" >
+		<entity schema="realestate_board" name="accounts" color="C1D8EE" x="352" y="272" />
+		<entity schema="realestate_board" name="aging_reports" color="C1D8EE" x="624" y="560" />
+		<entity schema="realestate_board" name="collections" color="C1D8EE" x="272" y="560" />
+		<entity schema="realestate_board" name="financial_statements" color="C1D8EE" x="448" y="560" />
+		<entity schema="realestate_board" name="plans" color="C1D8EE" x="752" y="352" />
+		<entity schema="realestate_board" name="proprietors" color="C1D8EE" x="144" y="192" />
+		<entity schema="realestate_board" name="receipts" color="C1D8EE" x="112" y="560" />
+		<entity schema="realestate_board" name="subscriptions" color="C1D8EE" x="560" y="352" />
+		<entity schema="realestate_board" name="users" color="C1D8EE" x="352" y="112" />
+		<callout x="48" y="48" pointer="Round" >
+			<comment><![CDATA[Create new tables from the right-click pop-up, new foreign keys by drag and drop of one column over the Pk column.
+For a better understanding of the schema create multiple layouts (diagrams) with the same or different tables.]]></comment>
+		</callout>
+	</layout>
+</project>
