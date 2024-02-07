@@ -43,6 +43,7 @@
 
 <!-- Scripts -->
 <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+@stack('data_scripts')
 @stack('scripts')
 </body>
 

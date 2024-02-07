@@ -53,7 +53,16 @@ class AuthController extends Controller {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        Session::flush();
+        # Session::flush();
         return redirect('/login');
     }
 }
+
+
+/*use App\Enums\SocialNetwork;
+use Illuminate\Validation\Rules\Enum;
+
+$request->validate([
+    'social_network' => [new Enum(SocialNetwork::class)],
+]);
+*/

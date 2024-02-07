@@ -8,7 +8,7 @@
       <!-- Navbar brand -->
       <a class="navbar-brand mt-2 mt-lg-0 logo" href="#">
         <img
-          src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" 
+          src="{{ asset('images/logo.svg') }}"
           alt="MDB Logo"
           loading="lazy"
         />
@@ -17,13 +17,16 @@
         <!-- Left links -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-active href="#">Dashboard</a>
+            <a class="nav-link {{ request()->is('dashboard*') ? 'active' : '' }}" 
+                aria-active href="{{ URL::to('dashboard')}}">Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Team</a>
+            <a class="nav-link {{ request()->is('contributions*') ? 'active' : '' }}"
+               href="{{ URL::to('contributions')}}">Contributions</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Projects</a>
+            <a class="nav-link {{ request()->is('proprietors*') ? 'active' : '' }}" 
+                href="{{ URL::to('proprietors')}}">Proprietors</a>
           </li>
         </ul>
       @endif
@@ -34,9 +37,11 @@
     <!-- Right elements -->
     <div class="d-flex align-items-center profile-block">
       <!-- Icon -->
-      <a class="text-reset me-3 user-greeting" href="#">
-        <span>Hi {{ $user->first_name }}!</span>
-      </a>
+      @auth
+        <a class="text-reset me-3 user-greeting" href="#">
+          <span>Hi {{  explode(' ',Auth::user()->name)[0] }}!</span>
+        </a>
+      @endauth
 
       @if (!Auth::guest())
       <!-- Avatar -->

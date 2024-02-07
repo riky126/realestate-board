@@ -1,0 +1,47 @@
+.title-action-bar {
+    display: flex;
+    justify-content: space-between;
+    margin: 4rem 0rem 3rem 0rem;
+}
+.title-action-bar .title,
+.title-action-bar .title h1 {
+    color: var(--light-gray2-color) !important;
+    font-weight: 300;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+    background-color: transparent !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(event) > * {
+    background-color: rgb(247, 247, 247) !important;
+}
+
+.table > thead {
+    border-color: transparent;
+}
+
+.table tr th {
+    background-color: rgb(150, 150, 150) !important;
+}
+
+.table tr th:first-child,
+.table tr:hover td:first-child {
+    border-radius: 0.2rem 0rem 0rem 0.2rem;
+}
+
+.table tr th:last-child,
+.table tr:hover th:last-child {
+    border-radius: 0rem 0.2rem 0.2rem  0rem;
+}
+
+.empty-row {
+    font-weight: 300;
+    color: var(--light-gray2-color);
+    text-align: center;
+    border-radius: 0.4rem;
+    position: relative;
+    top: -1rem;
+    padding: 1rem;
+    background-color: #fbfbfb;
+}

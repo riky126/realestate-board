@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Account extends Model
+class Customer extends Model
 {
     use HasFactory;
 
-    protected $table = 'accounts';
+    protected $table = 'customers';
 
     /**
      * The attributes that are mass assignable.
@@ -17,15 +17,14 @@ class Account extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'number',
-        'is_active'
+        'number'
     ];
 
-    public function owner() {
-        return $this->belongsTo(Customer::class, 'owner_id');
+    public function user() {
+        return $this->belongsTo(User::class);
     }
 
-    public function subscription() {
-        return $this->belongsTo(Subscription::class);
+    public function corporation() {
+        return $this->hasOne(Corporation::class, 'account_holder_id');
     }
 }

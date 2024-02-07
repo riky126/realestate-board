@@ -3,8 +3,10 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Controllers\ProprietorController;
+use App\Http\Controllers\ContributionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,9 +30,15 @@ Route::get('/', function () {
 
 /* GET Methods */
 Route::get('/login', [AuthController::class, 'show'])->name('show.login');
+Route::get('/create-account', [AccountController::class, 'show'])->name('show.create-account');
+Route::get('/account-success', function () {
+    return view('pages.success');
+});
+
 
 /* POST Methods */
 Route::post('/login',  [AuthController::class, 'login'])->name('login');
+Route::post('/create-account', [AccountController::class, 'create'])->name('create-account');
 
 /*
 /---------------------------------------------------------------------------
@@ -40,9 +48,15 @@ Route::post('/login',  [AuthController::class, 'login'])->name('login');
 
 Route::group(['middleware' => ['auth']], function () {
     /* GET Methods */
-    Route::get('/dashboard',  [DashboardController::class, 'show'])->name('show.dashboard');
-
-    /* POST Methods */
     Route::get('/logout',   [AuthController::class, 'logout'])->name('logout');
+    Route::get('/dashboard',  [DashboardController::class, 'show'])->name('show.dashboard');
+    Route::get('/contributions',  [ContributionController::class, 'show'])->name('show.contributions');
+    Route::get('/proprietors',  [ProprietorController::class, 'show'])->name('show.proprietors');
+
+
+    
+    /* POST Methods */
+    Route::post('/create-proprietor', [ProprietorController::class, 'create'])->name('create-proprietor');
+    
 
 });

@@ -78,3 +78,11 @@ body {
 .form-signin input[type="password"] {
   margin-bottom: 10px;
 }
+
+.footer {
+
+  position: absolute;
+  bottom: 0rem;
+  left: 0rem;
+  right: 0rem;
+}

@@ -11,29 +11,24 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('proprietors', function (Blueprint $table) {
+        Schema::create('corporations', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->integer('unit_entitlement');
-            $table->string('email')->unique();
-            $table->string('postal_address');
-            $table->dateTime('date_created');
-            $table->bigInteger('user_id')->unsigned()->unique();
+            $table->string('name')->unique();
+            $table->string('number')->unique();
+            $table->timestamps();
+
+            $table->bigInteger('account_holder_id')->unsigned()->unique();
             $table->bigInteger('account_id')->unsigned()->unique();
 
-            $table->foreign("user_id")
+            $table->foreign("account_holder_id")
                 ->references("id")
-                ->on("users")
+                ->on("customers")
                 ->onDelete("cascade");
 
             $table->foreign("account_id")
                 ->references("id")
                 ->on("accounts")
                 ->onDelete("cascade");
-
-            // $table->unsignedInteger('column_name')->nullable();
-
         });
     }
 
@@ -42,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('proprietors');
+        Schema::dropIfExists('corporations');
     }
 };

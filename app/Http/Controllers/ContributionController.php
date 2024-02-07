@@ -9,12 +9,9 @@ use Illuminate\Support\Facades\Hash;
 
 /** Internal Imports */
 use App\Models\User;
-use App\Models\Account;
-use App\Models\Porprietor;
 use App\Models\Contribution;
-use App\Models\Customer;
 
-class DashboardController extends Controller {
+class ContributionController extends Controller {
 
     /**
      * Create a new controller instance.
@@ -33,17 +30,13 @@ class DashboardController extends Controller {
      */
     public function show() {
         
-        $data = Customer::find(1)->corporation->account->subscription->plan;
-        
-        // $data = Customer::find(1)->corporation->proprietors()
-        //          ->where('id', 1)
-        //          ->first()->contributions;
-
-        // print_r($data);
+        $user = Auth::user();
+        $contributions = $user->customer->corporation->contributions;
 
         $data = [
-            'title' => 'Dashboard'
+            'title' => 'Contributions',
+            'contributions' => $contributions
         ];
-        return view('pages.dashboard', $data);
+        return view('pages.contributions', $data);
     }
 }

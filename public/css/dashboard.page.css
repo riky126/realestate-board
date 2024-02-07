@@ -1,0 +1,14 @@
+.insight-block {
+  padding: 5rem 0rem 1rem 0rem;
+}
+
+.recent-wrapper {
+  padding: 1rem 1.5rem;
+  background-color: #f5f5f5;
+  border-radius: 0.6rem;
+  margin-bottom: 3rem;
+}
+
+.table > :not(caption) > * > * {
+  background-color: transparent;
+}
