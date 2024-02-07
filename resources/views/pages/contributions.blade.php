@@ -26,7 +26,7 @@
       <thead class="table-dark">
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Donner</th>
+          <th scope="col">Contributor</th>
           <th scope="col">Amount</th>
           <th scope="col">Date</th>
         </tr>
@@ -36,8 +36,10 @@
         @foreach($contributions as $contribution)
           <tr>
             <td scope="row">{{ $contribution->id }}</td>
-            <td>{{ $contribution->proprietor->first_name }} {{ $contribution->proprietor->last_name }}</td>
-            <td>{{ $contribution->amount }}</td>
+            <td>{{ $contribution->proprietor->first_name }} {{ $contribution->proprietor->last_name }} 
+              <span class='lg-badge'>Lot #: {{ $contribution->proprietor->lot_number }}</span>
+            </td>
+            <td>${{ number_format($contribution->amount, 2) }}</td>
             <td>{{ $contribution->created_at }}</td>
           </tr>
         @endforeach

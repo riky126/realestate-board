@@ -27,6 +27,10 @@
 
 </header>
 
+<div class=''>
+    @include('fragements.strata-banner')
+</div>
+
 <div class="container">
    <main id="main" class="row">
 
@@ -42,6 +46,7 @@
 </footer>
 
 <!-- Scripts -->
+
 <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 @stack('data_scripts')
 @stack('scripts')

@@ -12,3 +12,13 @@
 .table > :not(caption) > * > * {
   background-color: transparent;
 }
+
+.empty-row {
+  font-weight: 300;
+  color: var(--light-gray2-color);
+  text-align: center;
+  border-radius: 0.4rem;
+  position: relative;
+  top: -1rem;
+  padding: 1rem;
+}

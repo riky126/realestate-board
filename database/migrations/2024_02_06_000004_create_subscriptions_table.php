@@ -16,6 +16,7 @@ return new class extends Migration
             $table->boolean('is_active');
             $table->timestamp('start_date')->useCurrent();
             $table->timestamp('renewal_date');
+            $table->timestamps();
 
             $table->bigInteger('plan_id')->unsigned()->unique();
             $table->bigInteger('customer_id')->unsigned()->unique();

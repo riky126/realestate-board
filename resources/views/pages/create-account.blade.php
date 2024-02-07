@@ -100,7 +100,7 @@
                 <label for="inputEmail" class="form-label">Email address</label>
                 <input type="email" name="email" id="inputEmail"
                       value="{{ old('email') }}"
-                      class="form-control" placeholder="Email address" required autofocus>
+                      class="form-control" placeholder="example@mail.com" required autofocus>
               </div>
     
               <div class='form-group'>

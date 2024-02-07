@@ -19,7 +19,10 @@
 
 <div class="container collection-list">
   <div class="table-wrapper">
-    <h5>List of Proprietors</h5>
+    <div class='table-lead'>
+      <h5>List of Proprietors </h5> <span class='lg-badge'>Month Maintenance: ${{ number_format($monthly_mentenace_budget, 2) }}</span>
+    </div>
+    
 
     <table class="table table-hover caption-top">
       <caption></caption>
@@ -29,7 +32,7 @@
           <th scope="col">Name</th>
           <th scope="col">Unit Ent.</th>
           <th scope="col">Email</th>
-          <th scope="col">Montly Fee</th>
+          <th scope="col">Monthly Fee</th>
         </tr>
       </thead>
       <tbody>
@@ -40,7 +43,7 @@
             <td>{{ $proprietor->first_name }} {{ $proprietor->last_name }}</td>
             <td>{{ $proprietor->unit_entitlement }}</td>
             <td>{{ $proprietor->email }}</td>
-            <td>$ {{ $proprietor->maintenance_fee}}</td>
+            <td>${{ number_format($proprietor->maintenance_fee, 2)}}</td>
           </tr>
         @endforeach
       @endif

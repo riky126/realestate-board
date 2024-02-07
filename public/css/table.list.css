@@ -9,6 +9,9 @@
     font-weight: 300;
 }
 
+.table-lead {
+    display: flex;
+}
 .table-striped > tbody > tr:nth-of-type(odd) > * {
     background-color: transparent !important;
 }
@@ -44,4 +47,19 @@
     top: -1rem;
     padding: 1rem;
     background-color: #fbfbfb;
+}
+
+/* Contribution Modal styles*/
+.form-group.amount-gp {
+    margin: 1rem auto 2rem auto;
+}
+
+.contrib-form .form-group label {
+    color: var(--light-gray1-color);
+}
+
+.form-group.amount-gp input {
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    width: 40%;
 }

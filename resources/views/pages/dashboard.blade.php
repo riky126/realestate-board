@@ -32,9 +32,10 @@
       <div class="col">
         <div class="card mb-4 rounded-3 shadow-sm border-primary">
           <div class="card-body">
-            <h1 class="card-title pricing-card-title">$29<small class="text-muted fw-light">/mo</small></h1>
+            <h1 class="card-title pricing-card-title">${{ number_format($monthly_mentenace_budget, 2) }}<small class="text-muted fw-light">/mo</small></h1>
             <ul class="list-unstyled mt-3 mb-4">
-              <li>30 users included</li>
+              <li><b>${{ number_format($total_mentenance_budget, 2) }}</b> for common
+area</li>
             </ul>
           </div>
         </div>
@@ -49,32 +50,28 @@
       <thead>
          <tr>
             <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Contributor</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Date</th>
          </tr>
       </thead>
       <tbody>
-         <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+        @foreach ($contributions as $contribution)
+          <tr>
+              <th scope="row">{{ $contribution->id }}</th>
+              <td>{{ $contribution->proprietor->first_name }} {{ $contribution->proprietor->last_name }}</td>
+              <td>${{ number_format($contribution->amount, 2) }}</td>
+              <td>{{ $contribution->created_at }}</td>
          </tr>
-         <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-         </tr>
-         <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-         </tr>
+        @endforeach
+      
       </tbody>
       </table>
+      @if ($contributions->isEmpty())
+        <div class='empty-row'>
+          No recently activity
+        </div>
+      @endif
       </div>
 </div>
 @stop

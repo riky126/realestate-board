@@ -34,11 +34,11 @@
     </section>
 
     <section class='section-block corp-info'>
-        <h5>Fund Info</h5>
+        <h5>Strata Title Info</h5>
         <div class='section-content'>
         <div class='form-group'>
             <label for="inputUnitEnt" class="form-label">Unit Entitlement</label>
-            <input type="text" name="ent_unit" id="inputUnitEnt" class="form-control" placeholder="#1" required autofocus>
+            <input type="number" min='1' name="unit_ent" id="inputUnitEnt" class="form-control" placeholder="#1" required autofocus>
         </div>
 
         <div class='form-group'>

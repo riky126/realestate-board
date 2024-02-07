@@ -6,6 +6,7 @@
     --light-gray1-color: #b1b1b1;
     --light-gray2-color: #afafaf;
     --light-gray3-color: #dfdfdf;
+    --text-color: #5c5c5c;
     --bs-table-striped-bg: #fff !important;
 }
 
@@ -74,7 +75,7 @@ a:active, a:focus {
 
 .navbar-brand img{
     display: block;
-    width: 2rem;
+    width: auto;
     height: 2rem;
 }
 
@@ -136,7 +137,8 @@ End Button Styles
     Forms Styles
 -------------------------------------
 */
-form input {
+form input,
+.form-select  {
     border-radius: var(--border-radius) !important;
 }
 
@@ -149,6 +151,11 @@ form .field-pair {
     display: grid;
     grid-template-columns: auto auto;
     gap: 0.5rem;
+}
+.form-select {
+    padding: 0.5rem 1rem;
+    color: var(--text-color);
+
 }
 
 .help-block {
@@ -179,6 +186,31 @@ form .field-pair {
 .alert {
     padding: 0.2rem 1rem;
     border-radius: 0.2rem;
+}
+
+.strata-badge {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.4rem 2rem;
+}
+
+.strata-badge .id-num {
+    opacity: 0.5;
+    border-radius: 0.2rem;
+}
+
+.lg-badge {
+    display: inline-block;
+    border: 1px solid var(--light-gray3-color);
+    border-radius: 0.6rem;
+    padding: 0.2rem 0.8rem;
+    background-color: #eeeff0;
+    margin: 0rem 1rem;
+    position: relative;
+    top: 0.1rem;
+    font-size: 0.9rem;
+    height: fit-content;
+    line-height: normal;
 }
 
 .footer {

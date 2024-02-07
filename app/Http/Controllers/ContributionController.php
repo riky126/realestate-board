@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 /** Internal Imports */
 use App\Models\User;
 use App\Models\Contribution;
+use App\Models\Proprietor;
 
 class ContributionController extends Controller {
 
@@ -31,12 +32,43 @@ class ContributionController extends Controller {
     public function show() {
         
         $user = Auth::user();
-        $contributions = $user->customer->corporation->contributions;
+        $corporation = $user->customer->corporation;
+
+        $proprietors = $user->customer->corporation->proprietors;
+        $contributions = Contribution::orderBy('created_at', 'desc')
+                    ->with('proprietor')
+                    ->where('corporation_id', '=', $corporation->id)
+                    ->get();
 
         $data = [
             'title' => 'Contributions',
-            'contributions' => $contributions
+            'contributions' => $contributions,
+            'proprietors' => $proprietors
         ];
         return view('pages.contributions', $data);
+    }
+
+    /**
+     * Add Contribution for Proprietor.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function create(Request $request, MessageBag $error) {
+        
+        validator($request->all(), [
+            'proprietor' => ['required'],
+            'amount' => ['required', 'numeric', 'min:1']
+        ])->validate();
+
+        $proprietor = Proprietor::find($request->proprietor);
+        $corporation = $proprietor->corporation;
+
+        $contribution = new Contribution();
+        $contribution->amount = $request->amount;
+        $contribution->proprietor_id = $proprietor->id;
+        $contribution->corporation_id = $corporation->id;
+        $contribution->save();
+
+        return back();
     }
 }

@@ -33,16 +33,21 @@ class DashboardController extends Controller {
      */
     public function show() {
         
-        $data = Customer::find(1)->corporation->account->subscription->plan;
-        
-        // $data = Customer::find(1)->corporation->proprietors()
-        //          ->where('id', 1)
-        //          ->first()->contributions;
+        $user = Auth::user();
+        $corporation = $user->customer->corporation;
 
-        // print_r($data);
+        $contributions = Contribution::orderBy('created_at', 'desc')
+                    ->with('proprietor')
+                    ->where('corporation_id', '=', $corporation->id)
+                    ->take(10)
+                    ->get();
 
+        $mentenance_budget = env('TOTAL_MAINTENANCE');
         $data = [
-            'title' => 'Dashboard'
+            'title' => 'Dashboard',
+            'contributions' => $contributions,
+            'total_mentenance_budget' => $mentenance_budget,
+            'monthly_mentenace_budget' => $mentenance_budget  / 12
         ];
         return view('pages.dashboard', $data);
     }

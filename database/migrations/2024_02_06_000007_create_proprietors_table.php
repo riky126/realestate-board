@@ -17,12 +17,16 @@ return new class extends Migration
             $table->string('last_name');
             $table->integer('unit_entitlement');
             $table->integer('lot_number')->unique();
-            $table->string('email')->unique();
-            $table->decimal('maintenance_fee', 8,2);
+            $table->string('email');
+            $table->decimal('maintenance_fee', 9,2);
             $table->string('postal_address')->nullable();
             $table->dateTime('date_created');
 
             $table->bigInteger('corporation_id')->unsigned();
+            $table->unique(array('email', 'corporation_id'));
+            $table->unique(array('lot_number', 'corporation_id'));
+            $table->timestamps();
+
 
             $table->foreign("corporation_id")
                 ->references("id")

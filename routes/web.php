@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth']], function () {
     
     /* POST Methods */
     Route::post('/create-proprietor', [ProprietorController::class, 'create'])->name('create-proprietor');
+    Route::post('/create-contribution', [ContributionController::class, 'create'])->name('create-contribution');
     
 
 });
