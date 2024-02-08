@@ -8,7 +8,7 @@
     @csrf
     
     <section class='section-block acct-details'>
-        <h5>Account Detail</h5>
+        <h5>Personal Info</h5>
         <div class='section-content'>
             <div class='form-group'>
             <label for="inputName" class="form-label">Name</label>

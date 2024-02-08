@@ -218,17 +218,15 @@
 			<column name="renewal_date" type="timestamp" length="19" decimal="0" jt="93" mandatory="y" />
 			<column name="plan_id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" />
 			<column name="customer_id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" />
-			<column name="created_at" type="datetime" length="19" decimal="0" jt="93" mandatory="y" >
-				<defo>CURRENT_TIMESTAMP</defo>
-			</column>
-			<column name="updated_at" type="datetime" length="19" decimal="0" jt="93" mandatory="y" />
+			<column name="created_at" type="timestamp" length="19" decimal="0" jt="93" />
+			<column name="updated_at" type="timestamp" length="19" decimal="0" jt="93" />
 			<index name="pk_subscriptions" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
 			<index name="subscriptions_customer_id_unique" unique="UNIQUE_CONSTRAINT" >
 				<column name="customer_id" />
 			</index>
-			<index name="subscriptions_plan_id_unique" unique="UNIQUE_CONSTRAINT" >
+			<index name="subscriptions_plan_id_unique" unique="NORMAL" >
 				<column name="plan_id" />
 			</index>
 			<fk name="subscriptions_customer_id_foreign" to_schema="realestate_board" to_table="customers" delete_action="cascade" update_action="restrict" >

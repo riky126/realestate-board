@@ -161,6 +161,12 @@ form .field-pair {
     grid-template-columns: auto auto;
     gap: 0.5rem;
 }
+
+form .form-group .form-label{
+    color: #3b3b3b;
+    margin-top: 0.5rem;
+}
+
 .form-select {
     padding: 0.5rem 1rem;
     color: var(--text-color);

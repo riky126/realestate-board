@@ -60,10 +60,10 @@ class ProprietorController extends Controller {
             $proprietor->unit_entitlement = $request->unit_ent;
             $proprietor->lot_number = $request->lot_number;
             $proprietor->postal_address = $request->address;
-            $proprietor->date_created = now();
-            $proprietor->maintenance_fee = $this->calculateMonthlyFee($request->unit_ent);
+            $proprietor->maintenance_fee = $this->calculateMonthlyFee($request->unit_ent, null);
             $proprietor->corporation_id = $user->customer->corporation->id;
             $proprietor->save();
+
             
             $request->flush();
             return back();
@@ -98,9 +98,9 @@ class ProprietorController extends Controller {
             $payload['lot_number'] = $request->lot_number;
             $payload['postal_address'] = $request->address;
             $payload['updated_at'] = now();
-            $payload['maintenance_fee'] = $this->calculateMonthlyFee($request->unit_ent);
-    
             $proprietor->update($payload);
+
+            $this->calculateMonthlyFee($request->unit_ent, $proprietor);
             
             $request->flush();
             return back();
@@ -116,19 +116,23 @@ class ProprietorController extends Controller {
         return ($total_maintenance * $unit_ent / $total_entitlement) / 12;
     }
 
-    protected function calculateMonthlyFee ($unit_ent) {
+    protected function calculateMonthlyFee ($unit_ent, $update_proprietor) {
         
         $user = Auth::user();
         $proprietors = $user->customer->corporation->proprietors;
+        
        
-        $total_entitlement = $proprietors->sum('unit_entitlement') + $unit_ent;
-        $total_maintenance = env('TOTAL_MAINTENANCE');
+        $total_entitlement =  $update_proprietor == null ? $proprietors->sum('unit_entitlement') + $unit_ent :
+                              $proprietors->sum('unit_entitlement');
 
+        $total_maintenance = env('TOTAL_MAINTENANCE');
         $monthly_fee = $this->calculateFee($total_maintenance, $unit_ent, $total_entitlement);
-    
+
         foreach($proprietors as $proprietor) {
+            
             $proprietor->maintenance_fee = $this->calculateFee($total_maintenance,
                                                 $proprietor->unit_entitlement, $total_entitlement);
+
             $proprietor->save();
         }
 

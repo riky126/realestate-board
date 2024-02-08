@@ -89,10 +89,10 @@
           aria-labelledby="navbarDropdownMenuAvatar"
         >
           <li>
-            <a class="dropdown-item" href="/profile">My profile</a>
+            <a class="dropdown-item" href="#profile">My profile</a>
           </li>
           <li>
-            <a class="dropdown-item" href="/account">Account</a>
+            <a class="dropdown-item" href="#account">Account</a>
           </li>
           <li>
             <a class="dropdown-item" href="{{ URL::to('logout')}}">Logout</a>
