@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('renewal_date');
             $table->timestamps();
 
-            $table->bigInteger('plan_id')->unsigned()->unique();
+            $table->bigInteger('plan_id')->unsigned();
             $table->bigInteger('customer_id')->unsigned()->unique();
 
             $table->foreign("plan_id")

@@ -12,9 +12,11 @@
       <div class="col">
         <div class="card mb-4 rounded-3 shadow-sm">
           <div class="card-body">
-            <h1 class="card-title pricing-card-title">$0<small class="text-muted fw-light">/mo</small></h1>
+            <h1 class="card-title pricing-card-title">
+              ${{ number_format($stats['total_contributions'], 2)  }}<small class="text-muted fw-light">/yr</small>
+            </h1>
             <ul class="list-unstyled mt-3 mb-4">
-              <li>10 users included</li>
+              <li>{{ $stats['contributions_count'] }} contributions included</li>
             </ul>
           </div>
         </div>
@@ -22,9 +24,9 @@
       <div class="col">
         <div class="card mb-4 rounded-3 shadow-sm">
           <div class="card-body">
-            <h1 class="card-title pricing-card-title">$15<small class="text-muted fw-light">/mo</small></h1>
+            <h1 class="card-title pricing-card-title">{{ $stats['total_units']}}<small class="text-muted fw-light"> units</small></h1>
             <ul class="list-unstyled mt-3 mb-4">
-              <li>20 users included</li>
+              <li>{{ $stats['proprietors_count']}} proprietors registered</li>
             </ul>
           </div>
         </div>
@@ -45,7 +47,7 @@ area</li>
 
 <div class="container recent-collection">
    <div class="recent-wrapper">
-   <h5>Recently Collections</h5>
+   <h5>Recent Collections</h5>
    <table class="table">
       <thead>
          <tr>

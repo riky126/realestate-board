@@ -1,5 +1,6 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+<nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary 
+{{ Auth::check() && Auth::user()->is_admin ? 'admin-nav': ''}}">
   <!-- Container wrapper -->
   <div class="container-fluid">
     
@@ -14,7 +15,8 @@
         />
       </a>
       @if (Auth::check())
-        <!-- Left links -->
+        <!-- Customer links -->
+        @if (!Auth::user()->is_admin)
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link {{ request()->is('dashboard*') ? 'active' : '' }}" 
@@ -29,6 +31,25 @@
                 href="{{ URL::to('proprietors')}}">Proprietors</a>
           </li>
         </ul>
+        @endif
+
+        <!-- Admin links -->
+        @if (Auth::user()->is_admin)
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link {{ request()->is('dashboard*') ? 'active' : '' }}" 
+                aria-active href="{{ URL::to('dashboard')}}">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ request()->is('subscriptions*') ? 'active' : '' }}" 
+                aria-active href="{{ URL::to('subscriptions')}}">Subscriptions</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ request()->is('customers*') ? 'active' : '' }}"
+               href="{{ URL::to('customers')}}">Customers</a>
+          </li>
+        </ul>
+        @endif
       @endif
       <!-- Left links -->
     </div>

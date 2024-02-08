@@ -7,6 +7,10 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProprietorController;
 use App\Http\Controllers\ContributionController;
+
+use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\SubscriptionController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,7 +50,7 @@ Route::post('/create-account', [AccountController::class, 'create'])->name('crea
 /---------------------------------------------------------------------------
 */
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth', 'auth.admin']], function () {
     /* GET Methods */
     Route::get('/logout',   [AuthController::class, 'logout'])->name('logout');
     Route::get('/dashboard',  [DashboardController::class, 'show'])->name('show.dashboard');
@@ -58,6 +62,10 @@ Route::group(['middleware' => ['auth']], function () {
     /* POST Methods */
     Route::post('/create-proprietor', [ProprietorController::class, 'create'])->name('create-proprietor');
     Route::post('/create-contribution', [ContributionController::class, 'create'])->name('create-contribution');
-    
+});
 
+Route::group(['middleware' => ['auth', 'auth.admin']], function () {
+    /* GET Methods */
+    Route::get('/customers',  [CustomerController::class, 'show'])->name('show.customers');
+    Route::get('/subscriptions',  [SubscriptionController::class, 'show'])->name('show.subscriptions');
 });

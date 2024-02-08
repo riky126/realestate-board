@@ -31,7 +31,7 @@
 		</table>
 		<table name="contributions" >
 			<column name="id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" autoincrement="y" />
-			<column name="amount" type="decimal" length="8" decimal="2" jt="3" mandatory="y" />
+			<column name="amount" type="decimal" length="9" decimal="2" jt="3" mandatory="y" />
 			<column name="created_at" type="timestamp" length="19" decimal="0" jt="93" />
 			<column name="updated_at" type="timestamp" length="19" decimal="0" jt="93" />
 			<column name="corporation_id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" />
@@ -159,11 +159,14 @@
 		<table name="plans" >
 			<column name="id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="name" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
-			<column name="pice" type="decimal" length="8" decimal="2" jt="3" mandatory="y" />
+			<column name="price" type="decimal" length="8" decimal="2" jt="3" mandatory="y" />
 			<column name="duration_in_months" type="int" length="10" decimal="0" jt="4" />
 			<column name="billing_cycle" type="varchar" length="255" decimal="0" jt="12" />
 			<column name="created_at" type="timestamp" length="19" decimal="0" jt="93" />
 			<column name="updated_at" type="timestamp" length="19" decimal="0" jt="93" />
+			<column name="discount" type="double" length="16" decimal="2" jt="8" mandatory="y" >
+				<defo>0.00</defo>
+			</column>
 			<index name="pk_plans" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -180,18 +183,25 @@
 			<column name="postal_address" type="varchar" length="255" decimal="0" jt="12" />
 			<column name="date_created" type="datetime" length="19" decimal="0" jt="93" mandatory="y" />
 			<column name="lot_number" type="int" length="10" decimal="0" jt="4" mandatory="y" />
-			<column name="maintenance_fee" type="decimal" length="2" decimal="2" jt="3" mandatory="y" />
+			<column name="maintenance_fee" type="decimal" length="9" decimal="2" jt="3" mandatory="y" />
 			<column name="corporation_id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" />
+			<column name="created_at" type="timestamp" length="19" decimal="0" jt="93" />
+			<column name="updated_at" type="timestamp" length="19" decimal="0" jt="93" />
 			<index name="pk_proprietor_id" unique="PRIMARY_KEY" >
 				<column name="id" />
-			</index>
-			<index name="proprietors_email_unique" unique="UNIQUE_CONSTRAINT" >
-				<column name="email" />
 			</index>
 			<index name="proprietors_lot_number_unique" unique="UNIQUE_CONSTRAINT" >
 				<column name="lot_number" />
 			</index>
 			<index name="proprietors_corporation_id_foreign" unique="NORMAL" >
+				<column name="corporation_id" />
+			</index>
+			<index name="proprietors_email_corporation_id_unique" unique="UNIQUE_CONSTRAINT" >
+				<column name="email" />
+				<column name="corporation_id" />
+			</index>
+			<index name="proprietors_lot_number_corporation_id_unique" unique="UNIQUE_CONSTRAINT" >
+				<column name="lot_number" />
 				<column name="corporation_id" />
 			</index>
 			<fk name="proprietors_corporation_id_foreign" to_schema="realestate_board" to_table="corporations" delete_action="cascade" update_action="restrict" >
@@ -208,6 +218,10 @@
 			<column name="renewal_date" type="timestamp" length="19" decimal="0" jt="93" mandatory="y" />
 			<column name="plan_id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" />
 			<column name="customer_id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" />
+			<column name="created_at" type="datetime" length="19" decimal="0" jt="93" mandatory="y" >
+				<defo>CURRENT_TIMESTAMP</defo>
+			</column>
+			<column name="updated_at" type="datetime" length="19" decimal="0" jt="93" mandatory="y" />
 			<index name="pk_subscriptions" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -220,7 +234,7 @@
 			<fk name="subscriptions_customer_id_foreign" to_schema="realestate_board" to_table="customers" delete_action="cascade" update_action="restrict" >
 				<fk_column name="customer_id" pk="id" />
 			</fk>
-			<fk name="subscriptions_plan_id_foreign" to_schema="realestate_board" to_table="plans" delete_action="cascade" update_action="restrict" >
+			<fk name="fk_subscriptions_plans" to_schema="realestate_board" to_table="plans" delete_action="cascade" update_action="restrict" >
 				<fk_column name="plan_id" pk="id" />
 			</fk>
 		</table>
@@ -246,18 +260,18 @@
 	</schema>
 	<connector name="MySql" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-8.0.19.jar" driver_desc="Standard" host="localhost" port="3306" instance="realestate_board" user="docker" passwd="ZG9ja2Vy" />
 	<layout name="Default Layout" id="Layout_1f15" show_relation="columns" >
-		<entity schema="realestate_board" name="accounts" color="C1D8EE" x="336" y="272" />
-		<entity schema="realestate_board" name="contributions" color="3986C1" x="512" y="768" />
-		<entity schema="realestate_board" name="corporations" color="3986C1" x="512" y="528" />
-		<entity schema="realestate_board" name="customers" color="3986C1" x="64" y="560" />
-		<entity schema="realestate_board" name="failed_jobs" color="3986C1" x="160" y="96" />
-		<entity schema="realestate_board" name="migrations" color="3986C1" x="336" y="96" />
-		<entity schema="realestate_board" name="password_reset_tokens" color="3986C1" x="496" y="96" />
-		<entity schema="realestate_board" name="personal_access_tokens" color="3986C1" x="720" y="48" />
-		<entity schema="realestate_board" name="plans" color="3986C1" x="800" y="352" />
-		<entity schema="realestate_board" name="proprietors" color="C1D8EE" x="240" y="704" />
-		<entity schema="realestate_board" name="subscriptions" color="3986C1" x="576" y="288" />
-		<entity schema="realestate_board" name="users" color="C1D8EE" x="80" y="272" />
+		<entity schema="realestate_board" name="accounts" color="C1D8EE" x="416" y="368" />
+		<entity schema="realestate_board" name="contributions" color="3986C1" x="592" y="864" />
+		<entity schema="realestate_board" name="corporations" color="3986C1" x="592" y="624" />
+		<entity schema="realestate_board" name="customers" color="3986C1" x="144" y="656" />
+		<entity schema="realestate_board" name="failed_jobs" color="3986C1" x="240" y="192" />
+		<entity schema="realestate_board" name="migrations" color="3986C1" x="416" y="192" />
+		<entity schema="realestate_board" name="password_reset_tokens" color="3986C1" x="576" y="192" />
+		<entity schema="realestate_board" name="personal_access_tokens" color="3986C1" x="800" y="144" />
+		<entity schema="realestate_board" name="plans" color="3986C1" x="880" y="448" />
+		<entity schema="realestate_board" name="proprietors" color="C1D8EE" x="320" y="800" />
+		<entity schema="realestate_board" name="subscriptions" color="3986C1" x="656" y="384" />
+		<entity schema="realestate_board" name="users" color="C1D8EE" x="160" y="368" />
 		<callout x="48" y="48" pointer="Round" >
 			<comment><![CDATA[Create new tables from the right-click pop-up, new foreign keys by drag and drop of one column over the Pk column.
 For a better understanding of the schema create multiple layouts (diagrams) with the same or different tables.]]></comment>

@@ -58,6 +58,10 @@ a:active, a:focus {
     border-radius: var(--border-radius);
 }
 
+.btn.btn-secondary:focus {
+    background-color: #6c757d !important;
+}
+
 .btn.btn-primary:focus {
     background-color: var(--primary-btn-bg-color) !important;
 }
@@ -71,6 +75,11 @@ a:active, a:focus {
 
 .navbar-brand {
     padding: 0rem 2rem;
+}
+
+.navbar.admin-nav {
+    background-color: #ece8e7 !important;
+    border-bottom: 2px solid #c8b8b8;
 }
 
 .navbar-brand img{

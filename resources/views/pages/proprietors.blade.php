@@ -17,13 +17,17 @@
     </div>
 </div>
 
+<div class='date-field-group'>
+  <label class='form-label'>Accounting period</label>
+  <input class='form-control' id="bday-month" type="month" name="bday-month" value="2024-02" />
+</div>
+
 <div class="container collection-list">
   <div class="table-wrapper">
     <div class='table-lead'>
       <h5>List of Proprietors </h5> <span class='lg-badge'>Month Maintenance: ${{ number_format($monthly_mentenace_budget, 2) }}</span>
     </div>
     
-
     <table class="table table-hover caption-top">
       <caption></caption>
       <thead class="table-dark">
