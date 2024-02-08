@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('plans', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('type');
-            $table->boolean('is_admin');
-            $table->rememberToken();
+            $table->string('name')->unique();
+            $table->decimal('price', 8,2);
+            $table->float('discount', 16, 2)->default(0.0);
+            $table->integer('duration_in_months')->nullable();
+            $table->string('billing_cycle')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('plans');
     }
 };
