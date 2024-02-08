@@ -60,6 +60,7 @@ class ProprietorController extends Controller {
             $proprietor->unit_entitlement = $request->unit_ent;
             $proprietor->lot_number = $request->lot_number;
             $proprietor->postal_address = $request->address;
+            $proprietor->date_created = now();
             $proprietor->maintenance_fee = $this->calculateMonthlyFee($request->unit_ent, null);
             $proprietor->corporation_id = $user->customer->corporation->id;
             $proprietor->save();
@@ -129,7 +130,6 @@ class ProprietorController extends Controller {
         $monthly_fee = $this->calculateFee($total_maintenance, $unit_ent, $total_entitlement);
 
         foreach($proprietors as $proprietor) {
-            
             $proprietor->maintenance_fee = $this->calculateFee($total_maintenance,
                                                 $proprietor->unit_entitlement, $total_entitlement);
 
