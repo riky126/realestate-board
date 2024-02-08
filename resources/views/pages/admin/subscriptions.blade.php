@@ -33,7 +33,7 @@
       </thead>
       <tbody>
       @if ($subscriptions->isNotEmpty())
-        @foreach($subscriptions as $subscription)
+        @foreach($subscriptions as $index => $subscription)
           <tr>
             <td scope="row">{{ $subscription->id }}</td>
             <td>{{ $subscription->account->number }}</td>
@@ -41,7 +41,41 @@
             <td>{{ $subscription->plan->name }}</td>
             <td>{{ $subscription->is_active ? 'Active' : 'InActive' }}</td>
             <td>{{ $subscription->start_date }}</td>
-            <td>{{ $subscription->renewal_date }}</td>
+            <td>
+              {{ $subscription->renewal_date }}
+              <div class='d-flex justify-content-end contextmenu-block' data-row='{{ $index }}'>
+                <div class="dropdown menu-options">
+                  <button
+                    data-mdb-dropdown-init
+                    class="dropdown-toggle d-flex align-items-center"
+                    href="#"
+                    id="navbarDropdownMenuOption"
+                    role="button"
+                    data-bs-toggle="dropdown" 
+                    aria-expanded="false"
+                  >
+                    <img
+                      src="{{ URL::asset('images/more-option-icon.svg') }}"
+                      class="rounded-circle avatar-icon"
+                      height="25"
+                      alt="Black and White Portrait of a Man"
+                      loading="lazy"
+                    />
+                  </button>
+                  <ul
+                    class="dropdown-menu dropdown-menu-end"
+                    aria-labelledby="navbarDropdownMenuOption"
+                  >
+                    <li>
+                      <a class="dropdown-item" href="/#edit">Payments</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="/#delete">Cancel</a>
+                    </li>
+                    </ul>
+                  </div>
+                </div>
+            </td>
           </tr>
         @endforeach
       @endif

@@ -31,11 +31,24 @@
 .table tr th:first-child,
 .table tr:hover td:first-child {
     border-radius: 0.2rem 0rem 0rem 0.2rem;
+    position: relative;
+}
+
+.table tr td {
+    position: relative;
 }
 
 .table tr th:last-child,
 .table tr:hover th:last-child {
     border-radius: 0rem 0.2rem 0.2rem  0rem;
+}
+
+.table tr .contextmenu-block {
+    display: none !important;
+}
+
+.table tr:hover .contextmenu-block {
+    display: block !important;
 }
 
 .empty-row {

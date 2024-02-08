@@ -4,6 +4,16 @@
     <link href="{{ asset('css/table.list.css') }}" rel="stylesheet">
 @endpush
 
+@push('data_scripts')
+    <script type="text/javascript">
+      var $PROPRIETORS = @json($proprietors->toArray())
+    </script>
+@endpush
+
+@push('scripts')
+    <script type="text/javascript" src="{{ asset('js/proprietor-page.js') }}"></script>
+@endpush
+
 @section('content')
 
 <div class='container'>
@@ -41,13 +51,58 @@
       </thead>
       <tbody>
       @if ($proprietors->isNotEmpty())
-        @foreach($proprietors as $proprietor)
-          <tr>
+        @foreach($proprietors as $index => $proprietor)
+          <tr data-row-id='{{ $index }}'>
             <td scope="row">{{ $proprietor->lot_number }}</td>
             <td>{{ $proprietor->first_name }} {{ $proprietor->last_name }}</td>
             <td>{{ $proprietor->unit_entitlement }}</td>
             <td>{{ $proprietor->email }}</td>
-            <td>${{ number_format($proprietor->maintenance_fee, 2)}}</td>
+            <td>${{ number_format($proprietor->maintenance_fee, 2)}}
+              
+              <div class='d-flex justify-content-end contextmenu-block'>
+                <div class="dropdown menu-options">
+                  <button
+                    data-mdb-dropdown-init
+                    class="dropdown-toggle d-flex align-items-center"
+                    href="#"
+                    id="navbarDropdownMenuOption"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    data-row-id={{ $index }}
+                    aria-expanded="false"
+                  >
+                    <img
+                      src="{{ URL::asset('images/more-option-icon.svg') }}"
+                      class="rounded-circle avatar-icon"
+                      height="25"
+                      alt="Black and White Portrait of a Man"
+                      loading="lazy"
+                    />
+                  </button>
+                  <ul
+                    class="dropdown-menu dropdown-menu-end"
+                    aria-labelledby="navbarDropdownMenuOption"
+                  >
+                    <li>
+                      <a class="dropdown-item" 
+                        data-action-command='edit'
+                        data-row-id={{ $index }}
+                        href="/#edit" data-bs-target="#exampleModalToggle"
+                        data-bs-toggle="modal" >
+                        Edit
+                      </a>
+                    </li>
+                    <li>
+                      <a 
+                        class="dropdown-item"
+                        data-row-id={{ $index }}
+                        data-action-command='delete'
+                        href="/#delete">Delete</a>
+                    </li>
+                    </ul>
+                  </div>
+                </div>
+            </td>
           </tr>
         @endforeach
       @endif

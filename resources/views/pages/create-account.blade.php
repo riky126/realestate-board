@@ -6,11 +6,10 @@
 
 @push('data_scripts')
     <script type="text/javascript">
-      var plans = '<?php echo json_encode($plans); ?>';
+      // var plans = '<?php echo json_encode($plans); ?>';
       var $PLANS = @json($plans->toArray())
     </script>
 @endpush
-
 
 @push('scripts')
     <script type="text/javascript" src="{{ asset('js/create-account.js') }}"></script>

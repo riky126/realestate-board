@@ -73,7 +73,42 @@ class ProprietorController extends Controller {
                 'createError' => $e->getMessage(),
             ]);
         }
-        
+    }
+
+    /**
+     * Update new Proprietor.
+     *
+     * @return \Illuminate\Http\HttpResponse
+     */
+    public function update(ProprietorRequest $request, MessageBag $error) {
+     
+        try {
+            $proprietor = Proprietor::whereId($request->proprietor);
+
+            if ($proprietor == null) {
+                return back()->withErrors([
+                    'existingUser' => 'Unable to update proprietor',
+                ]);
+            }
+
+            $payload['first_name'] = $request->first_name;
+            $payload['last_name'] = $request->last_name;
+            $payload['email'] = $request->email;
+            $payload['unit_entitlement'] = $request->unit_ent;
+            $payload['lot_number'] = $request->lot_number;
+            $payload['postal_address'] = $request->address;
+            $payload['updated_at'] = now();
+            $payload['maintenance_fee'] = $this->calculateMonthlyFee($request->unit_ent);
+    
+            $proprietor->update($payload);
+            
+            $request->flush();
+            return back();
+        }catch(Exception $e) {
+            return back()->withErrors([
+                'updateError' => $e->getMessage(),
+            ]);
+        }
     }
 
 
