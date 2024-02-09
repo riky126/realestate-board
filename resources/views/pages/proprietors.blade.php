@@ -6,7 +6,8 @@
 
 @push('data_scripts')
     <script type="text/javascript">
-      var $PROPRIETORS = @json($proprietors->toArray())
+      var $PROPRIETORS = @json($proprietors->toArray());
+      var $MODAL_ERROR = @json($errors->toArray());
     </script>
 @endpush
 
@@ -33,9 +34,11 @@
 </div>
 
 <div class="container collection-list">
+
   <div class="table-wrapper">
     <div class='table-lead'>
-      <h5>List of Proprietors </h5> <span class='lg-badge'>Month Maintenance: ${{ number_format($monthly_mentenace_budget, 2) }}</span>
+      <h5>List of Proprietors </h5> 
+      <span class='lg-badge'>Month Maintenance: ${{ number_format($monthly_mentenace_budget, 2) }}</span>
     </div>
     
     <table class="table table-hover caption-top">

@@ -1,10 +1,8 @@
 <meta charset="utf-8">
-
 <meta name="description" content="">
-
 <meta name="Saquib" content="Blade">
 
-<title>Checkout our layout</title>
+<title>Stratafair | {{ isset($title) ? $title : 'Title' }}</title>
 
 <!-- load bootstrap from a cdn -->
 

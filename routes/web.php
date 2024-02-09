@@ -23,7 +23,7 @@ use App\Http\Controllers\Admin\SubscriptionController;
 */
 
 Route::get('/', function () {
-    return view('pages.home');
+    return view('pages.home', ['title' => 'Home']);
 });
 
 /*
@@ -36,7 +36,7 @@ Route::get('/', function () {
 Route::get('/login', [AuthController::class, 'show'])->name('show.login');
 Route::get('/create-account', [AccountController::class, 'show'])->name('show.create-account');
 Route::get('/account-success', function () {
-    return view('pages.success');
+    return view('pages.success', ['title' => 'Success']);
 });
 
 
@@ -49,7 +49,6 @@ Route::post('/create-account', [AccountController::class, 'create'])->name('crea
 / PRIVATE ROUTES
 /---------------------------------------------------------------------------
 */
-
 Route::group(['middleware' => ['auth', 'auth.admin']], function () {
     /* GET Methods */
     Route::get('/logout',   [AuthController::class, 'logout'])->name('logout');
@@ -57,8 +56,6 @@ Route::group(['middleware' => ['auth', 'auth.admin']], function () {
     Route::get('/contributions',  [ContributionController::class, 'show'])->name('show.contributions');
     Route::get('/proprietors',  [ProprietorController::class, 'show'])->name('show.proprietors');
 
-
-    
     /* POST Methods */
     Route::post('/create-proprietor', [ProprietorController::class, 'create'])->name('create-proprietor');
     Route::post('/update-proprietor', [ProprietorController::class, 'update'])->name('update-proprietor');

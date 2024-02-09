@@ -14,18 +14,18 @@ class AuthController extends Controller {
     /**
      * Request the login page.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\HttpResponse
      */
     public function show() {
-        // echo Hash::make("password");
         $data['title'] = 'Login';
         return view('pages.login', $data);
     }
 
     /**
      * Get the authenticated User.
-     *
-     * @return \Illuminate\Http\JsonResponse
+     * @param request
+     * @param error
+     * @return \Illuminate\Http\HttpResponse
      */
     public function login(Request $request, MessageBag $error) {
         
@@ -46,23 +46,13 @@ class AuthController extends Controller {
 
     /**
      * Logout the User and and discard User session.
-     *
-     * @return \Illuminate\Http\JsonResponse
+     * @param request
+     * @return \Illuminate\Http\HttpResponse
      */
     public function logout(Request $request) {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        # Session::flush();
         return redirect('/login');
     }
 }
-
-
-/*use App\Enums\SocialNetwork;
-use Illuminate\Validation\Rules\Enum;
-
-$request->validate([
-    'social_network' => [new Enum(SocialNetwork::class)],
-]);
-*/
