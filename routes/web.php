@@ -7,6 +7,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProprietorController;
 use App\Http\Controllers\ContributionController;
+use App\Http\Controllers\ProfileController;
 
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\SubscriptionController;
@@ -55,6 +56,8 @@ Route::group(['middleware' => ['auth', 'auth.admin']], function () {
     Route::get('/dashboard',  [DashboardController::class, 'show'])->name('show.dashboard');
     Route::get('/contributions',  [ContributionController::class, 'show'])->name('show.contributions');
     Route::get('/proprietors',  [ProprietorController::class, 'show'])->name('show.proprietors');
+
+    Route::get('profile', [ProfileController::class, 'show'])->name('profile');
 
     /* POST Methods */
     Route::post('/create-proprietor', [ProprietorController::class, 'create'])->name('create-proprietor');

@@ -14,7 +14,7 @@ Object.prototype.renameProperty = function (oldName, newName) {
 document.addEventListener('DOMContentLoaded', ProprietorPage, false);
 
 function ProprietorPage () {
-    // $PROPRIETORS in comming from laravel
+    // window.PROPRIETORS in comming from laravel
     // code here...
     setupOptionsMenu();
 }
@@ -26,6 +26,8 @@ function setupOptionsMenu() {
     const defaultformAction = $form.action;
     const defaultButtonLabel = submitButton.innerText;
     const modelCloseButton = document.querySelector('.btn-close');
+    const modalContainer = document.getElementById('exampleModalToggle');
+
     let proprietor;
 
     const commandAction = {
@@ -40,7 +42,7 @@ function setupOptionsMenu() {
 
     function onUpdateCommand (event) {
         const rowId = event.currentTarget.getAttribute('data-row-id');
-        proprietor = $PROPRIETORS[rowId];
+        proprietor = window.PROPRIETORS[rowId];
         $form.action = `update-proprietor`;
         submitButton.innerHTML = 'Update';
 
@@ -61,7 +63,9 @@ function setupOptionsMenu() {
         event.preventDefault();
     }
 
-    const willCloseModel = () => {
+    const willCloseModel = (event) => {
+        if(event.target !== event.currentTarget) return;
+        
         $form.action = defaultformAction;
         submitButton.innerHTML = defaultButtonLabel;
         proprietor = null;
@@ -81,7 +85,8 @@ function setupOptionsMenu() {
     $form.onsubmit = onSubmit;
 
     modelCloseButton.addEventListener('click', willCloseModel);
-
+    modalContainer.addEventListener('click', willCloseModel);
+    
     rowOptionItems.forEach((menuButton) => {
         menuButton.addEventListener('click', didClickMenu);
     });

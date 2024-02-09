@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', CreateAccountPage, false);
 
 function CreateAccountPage () {
-    // $PLANS in comming from laravel
+    // PLANS in comming from laravel
     // code here...
     const selectedClass = '--selected'
     const plansElements = document.querySelectorAll('.plan-group');
@@ -18,7 +18,7 @@ function CreateAccountPage () {
 
     const setPlanInputValue = (planId) => {
         const inputField = document.getElementById('inputPlan');
-        const plan = $PLANS.find((plan) => plan.id === parseInt(planId));
+        const plan = window.PLANS.find((plan) => plan.id === parseInt(planId));
         inputField.setAttribute('value', plan.id)
     }
 
@@ -26,7 +26,7 @@ function CreateAccountPage () {
          
         if (i === 0) {
             item.classList.add(selectedClass);
-            setPlanInputValue($PLANS[0].id);
+            setPlanInputValue(window.PLANS[0].id);
         }
         item.addEventListener('click', handleSelect)
         

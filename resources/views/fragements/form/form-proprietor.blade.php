@@ -14,16 +14,16 @@
             <label for="inputName" class="form-label">Name</label>
             <div class="field-pair">
                 <input type="text" name="first_name" id="inputFirstName"
-                        value="{{ old('first_name') }}"  
+                        value="{{ old('first_name') }}"
                         class="form-control" placeholder="John" required autofocus>
-                <input type="text" name="last_name" id="inputLastName" 
+                <input type="text" name="last_name" id="inputLastName"
                         value="{{ old('last_name') }}"
                         class="form-control" placeholder="Joe" required autofocus>
             </div>
 
             <div class='form-group'>
                 <label for="inputEmail" class="form-label">Email address</label>
-                <input type="email" name="email" id="inputEmail" 
+                <input type="email" name="email" id="inputEmail"
                         value="{{ old('email') }}"
                         class="form-control" placeholder="Email address" required autofocus>
             </div>

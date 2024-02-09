@@ -7,7 +7,7 @@
 @push('data_scripts')
     <script type="text/javascript">
       // var plans = '<?php echo json_encode($plans); ?>';
-      var $PLANS = @json($plans->toArray())
+      window.PLANS = @json($plans->toArray())
     </script>
 @endpush
 

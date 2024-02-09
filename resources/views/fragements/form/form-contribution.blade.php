@@ -24,7 +24,7 @@
         
             <div class='form-group amount-gp'>
                 <label for="inputName" class="form-label">Amount</label>
-                <input type="number" name="amount" id="inputAmount" 
+                <input type="number" name="amount" id="inputAmount" step=".01"
                         class="form-control" placeholder="0.0" value='{{ old('amount') }}' required autofocus>
             </div>
         </div>

@@ -57,16 +57,20 @@ class ProprietorController extends Controller {
             ->orWhere('corporation_id', $user->customer->corporation->id)->first();
 
             if ($existingProprietor != null) {
-                return back()->withErrors([
-                    'createError' => "Proprietor exist with that email: {$request->email}",
-                ]);
+                return back()
+                    ->withInput()
+                    ->withErrors([
+                        'createError' => "Proprietor exist with that email: {$request->email}",
+                    ]);
             }
 
             $existingProprietor = Proprietor::where('lot_number', $request->lot_number)
             ->orWhere('corporation_id', $user->customer->corporation->id)->first();
 
             if ($existingProprietor != null) {
-                return back()->withErrors([
+                return back()
+                    ->withInput()
+                    ->withErrors([
                     'createError' => "Proprietor exist with same lot#: {$request->lot_number}",
                 ]);
             }

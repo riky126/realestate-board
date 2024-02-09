@@ -242,7 +242,7 @@ form .form-group .form-label{
     display: inline-block;
     border: 1px solid var(--light-gray3-color);
     border-radius: 0.6rem;
-    padding: 0.2rem 0.8rem;
+    padding: 0.2rem 0.6rem;
     background-color: #eeeff0;
     margin: 0rem 1rem;
     position: relative;
