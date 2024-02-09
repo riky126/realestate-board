@@ -61,6 +61,13 @@ class AccountController extends Controller {
                         'existingUser' => 'User exist with that email: ' . $request->email,
                     ]);
                 }
+
+                $existingCorporation = $this->getCorporationByNameOrNumber($request->name, $request->strata_number);
+                
+                if ($existingCorporation != null) {
+                    throw new \ErrorException("Corporation exit with that name: {$request->name}
+                     or number: {$request->strata_number}");
+                }
     
                 // [1] Create User
                 $user = User::create([
@@ -113,7 +120,7 @@ class AccountController extends Controller {
 
                 DB::commit();
                 //to put the posted data to session
-                $request->flash(); 
+                $request->flash();
                 return redirect('/account-success');
             });
 
@@ -132,11 +139,23 @@ class AccountController extends Controller {
      * @return mixed
      */
     public function getUserByUserEmail($email) {
-        return User::where('email', $email) -> first();
+        return User::where('email', $email)->first();
     }
 
     /**
-     * Fetch user
+     * Fetch Corporation
+     * (You can extract this to repository method).
+     *
+     * @param  $email
+     * @return mixed
+     */
+    public function getCorporationByNameOrNumber($name, $number) {
+        return Corporation::where('name', $name)
+                        ->orWhere('number', $number)->first();
+    }
+
+    /**
+     * Fetch Plan
      * (You can extract this to repository method).
      *
      * @param  $email

@@ -53,6 +53,24 @@ class ProprietorController extends Controller {
         $user = Auth::user();
 
         try {
+            $existingProprietor = Proprietor::where('email', $request->email)
+            ->orWhere('corporation_id', $user->customer->corporation->id)->first();
+
+            if ($existingProprietor != null) {
+                return back()->withErrors([
+                    'createError' => "Proprietor exist with that email: {$request->email}",
+                ]);
+            }
+
+            $existingProprietor = Proprietor::where('lot_number', $request->lot_number)
+            ->orWhere('corporation_id', $user->customer->corporation->id)->first();
+
+            if ($existingProprietor != null) {
+                return back()->withErrors([
+                    'createError' => "Proprietor exist with same lot#: {$request->lot_number}",
+                ]);
+            }
+        
             $proprietor = new Proprietor();
             $proprietor->first_name = $request->first_name;
             $proprietor->last_name = $request->last_name;
@@ -65,9 +83,9 @@ class ProprietorController extends Controller {
             $proprietor->corporation_id = $user->customer->corporation->id;
             $proprietor->save();
 
-            
             $request->flush();
-            return back();
+            return back()
+                   ->with('success', 'Successfully! created Proprietor');
 
         }catch(Exception $e) {
             return back()->withErrors([
