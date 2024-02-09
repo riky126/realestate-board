@@ -6,8 +6,8 @@
 
 @push('data_scripts')
     <script type="text/javascript">
-      var $PROPRIETORS = @json($proprietors->toArray());
-      var $MODAL_ERROR = @json($errors->toArray());
+      window['PROPRIETORS'] = @json($proprietors->toArray());
+      window['MODAL_ERROR'] = @json($errors->toArray());
     </script>
 @endpush
 

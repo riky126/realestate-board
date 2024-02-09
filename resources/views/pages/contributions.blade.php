@@ -4,6 +4,16 @@
     <link href="{{ asset('css/table.list.css') }}" rel="stylesheet">
 @endpush
 
+@push('data_scripts')
+  <script type="text/javascript">
+    window['PROPRIETORS'] = @json($proprietors->toArray());
+  </script>
+@endpush
+
+@push('scripts')
+    <script type="text/javascript" src="{{ asset('js/constribution-page.js') }}"></script>
+@endpush
+
 @section('content')
 
 <div class='container'>
@@ -27,7 +37,8 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Contributor</th>
-          <th scope="col">Amount</th>
+          <th scope="col">Monthly Fee</th>
+          <th scope="col">Amount Paid</th>
           <th scope="col">Date</th>
         </tr>
       </thead>
@@ -39,7 +50,13 @@
             <td>{{ $contribution->proprietor->first_name }} {{ $contribution->proprietor->last_name }} 
               <span class='lg-badge'>Lot #: {{ $contribution->proprietor->lot_number }}</span>
             </td>
-            <td>${{ number_format($contribution->amount, 2) }}</td>
+            <td>
+              ${{ number_format($contribution->proprietor->maintenance_fee, 2) }}
+              </td>
+            <td>
+              ${{ number_format($contribution->amount, 2) }}
+              <span class='lg-badge'>{{ $contribution->amount - $contribution->proprietor->maintenance_fee }}</span>
+            </td>
             <td>{{ $contribution->created_at }}</td>
           </tr>
         @endforeach

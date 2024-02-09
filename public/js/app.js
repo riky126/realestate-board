@@ -7,7 +7,7 @@ function App() {
 function Modals () {
     const modalButtonTrigger = document.querySelector('button[data-bs-toggle="modal"]');
     
-    if (Object.keys($MODAL_ERROR).length > 0 && modalButtonTrigger) {
+    if (Object.keys(window.MODAL_ERROR ?? []).length > 0 && modalButtonTrigger) {
         modalButtonTrigger.click();
     }
 }
