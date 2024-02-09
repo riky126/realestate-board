@@ -65,9 +65,11 @@ class AccountController extends Controller {
                 $existingUser = $this->userRepository->getUserByUserEmail($request->email);
 
                 if ($existingUser != null) {
-                    return back()->withErrors([
-                        'existingUser' => 'User exist with that email: ' . $request->email,
-                    ]);
+                    return back()
+                        ->withInput()
+                        ->withErrors([
+                            'existingUser' => 'User exist with that email: ' . $request->email,
+                        ]);
                 }
 
                 $existingCorporation = $this->getCorporationByNameOrNumber($request->name, $request->strata_number);
@@ -135,7 +137,10 @@ class AccountController extends Controller {
             
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            return redirect()
+                    ->back()
+                    ->withInput()
+                    ->withErrors(['error' => $e->getMessage()]);
         }
     }
 
