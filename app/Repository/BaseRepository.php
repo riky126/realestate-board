@@ -5,7 +5,7 @@ namespace App\Repository;
 use App\Repository\Protocols\EloquentRepositoryInterface; 
 use Illuminate\Database\Eloquent\Model;   
 
-class BaseRepository implements EloquentRepositoryInterface 
+abstract class BaseRepository implements EloquentRepositoryInterface 
 {     
     /**      
      * @var Model      
