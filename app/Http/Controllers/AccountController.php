@@ -16,18 +16,26 @@ use App\Models\Corporation;
 use App\Models\Subscription;
 use App\Models\User;
 
+use App\Repository\Protocols\UserRepositoryInterface;
+
 use App\Common\Enums\UserType;
 use App\Http\Requests\CreateAccountRequest;
 
 
 class AccountController extends Controller {
+    /**
+     * @var userRepo
+     */
+    private $userRepository;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct() { }
+    public function __construct(UserRepositoryInterface $userRepository) { 
+        $this->userRepository = $userRepository;
+    }
     
     /**
      * Request the Create Account page.
@@ -54,7 +62,7 @@ class AccountController extends Controller {
         try {
             return DB::transaction(function() use ($request) {
 
-                $existingUser = $this->getUserByUserEmail($request->email);
+                $existingUser = $this->userRepository->getUserByUserEmail($request->email);
 
                 if ($existingUser != null) {
                     return back()->withErrors([
@@ -129,17 +137,6 @@ class AccountController extends Controller {
             DB::rollback();
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
-    }
-
-    /**
-     * Fetch user
-     * (You can extract this to repository method).
-     *
-     * @param  $email
-     * @return mixed
-     */
-    public function getUserByUserEmail($email) {
-        return User::where('email', $email)->first();
     }
 
     /**
