@@ -2,13 +2,9 @@
 namespace App\Http\Controllers\Admin;
 
 /** External Imports */
-use Illuminate\Http\Request;
-use Illuminate\Support\MessageBag;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 /** Internal Imports */
-use App\Models\User;
 use App\Models\Customer;
 use App\Http\Controllers\Controller;
 
@@ -25,7 +21,7 @@ class CustomerController extends Controller {
     }
     
     /**
-     * Request the Subscription page.
+     * Request the Customer page.
      *
      * @return \Illuminate\Http\HttpResponse
      */

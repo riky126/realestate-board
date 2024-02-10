@@ -22,7 +22,7 @@ class ProprietorController extends Controller {
     }
     
     /**
-     * Request the login page.
+     * Request the Proprietor List page.
      *
      * @return \Illuminate\Http\HttpResponse
      */
@@ -104,11 +104,13 @@ class ProprietorController extends Controller {
      
         try {
             $proprietor = Proprietor::whereId($request->proprietor);
-
+            
             if ($proprietor == null) {
-                return back()->withErrors([
-                    'existingUser' => 'Unable to update proprietor',
-                ]);
+                return back()
+                    ->withInput()
+                    ->withErrors([
+                        'existingUser' => 'Unable to update proprietor',
+                    ]);
             }
 
             $payload['first_name'] = $request->first_name;
@@ -125,7 +127,9 @@ class ProprietorController extends Controller {
             $request->flush();
             return back();
         }catch(\Exception $e) {
-            return back()->withErrors([
+            return back()
+                ->withInput()
+                ->withErrors([
                 'updateError' => $e->getMessage(),
             ]);
         }

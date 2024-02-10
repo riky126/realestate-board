@@ -61,7 +61,7 @@ class AccountController extends Controller {
             return DB::transaction(function() use ($request) {
 
                 $existingUser = $this->userRepository->getUserByUserEmail($request->email);
-
+                
                 if ($existingUser != null) {
                     return back()
                         ->withInput()

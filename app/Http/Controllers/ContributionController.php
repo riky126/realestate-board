@@ -23,7 +23,7 @@ class ContributionController extends Controller {
     }
     
     /**
-     * Request the login page.
+     * Request the Contribution List page.
      *
      * @return \Illuminate\Http\HttpResponse
      */
