@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 * Interface EloquentRepositoryInterface
 * @package App\Repositories
 */
-interface EloquentRepositoryInterface
-{
+interface EloquentRepositoryInterface {
    /**
     * @param array $attributes
     * @return Model
