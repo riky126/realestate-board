@@ -18,14 +18,16 @@ class PlanSeeder extends Seeder
             'name'                  =>  'Basic',
             'price'                 =>  1000,
             'billing_cycle'         =>  'Monlty',
-            'duration_in_months'    =>  1
+            'duration_in_months'    =>  1,
+            'discount'              =>  0.0
         ]);
 
         \App\Models\Plan::factory()->create([
             'name'                  =>  'Standard',
             'price'                 =>  10000,
             'billing_cycle'         =>  'Yearly',
-            'duration_in_months'    =>  12  
+            'duration_in_months'    =>  12,
+            'discount'              =>  18.0
         ]);
     }
 }

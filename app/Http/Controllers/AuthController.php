@@ -2,6 +2,8 @@
 namespace App\Http\Controllers;
 
 /** External Imports */
+
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +30,6 @@ class AuthController extends Controller {
      * @return \Illuminate\Http\HttpResponse
      */
     public function login(Request $request, MessageBag $error) {
-        
         validator($request->all(), [
             'email' => ['required', 'email'],
             'password' => ['required']
