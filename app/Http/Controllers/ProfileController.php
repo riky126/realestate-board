@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class ProfileController extends Controller {
     
     /**
-     * Request the login page.
+     * Request the Profile page.
      *
      * @return \Illuminate\Http\HttpResponse
      */
