@@ -90,7 +90,7 @@ class AccountController extends Controller {
 
 
                 // [2] Create Customer
-                $customer_number = (time()+ rand(1,1000));
+                $customer_number = (time() + rand(1,1000));
 
                 $customer = new Customer();
                 $customer->number = $customer_number;

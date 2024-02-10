@@ -17,8 +17,7 @@ abstract class BaseRepository implements EloquentRepositoryInterface
      *      
      * @param Model $model      
      */     
-    public function __construct(Model $model)     
-    {         
+    public function __construct(Model $model) {         
         $this->model = $model;
     }
  
@@ -27,8 +26,7 @@ abstract class BaseRepository implements EloquentRepositoryInterface
     *
     * @return Model
     */
-    public function create(array $attributes): Model
-    {
+    public function create(array $attributes): Model {
         return $this->model->create($attributes);
     }
  
@@ -36,8 +34,7 @@ abstract class BaseRepository implements EloquentRepositoryInterface
     * @param $id
     * @return Model
     */
-    public function find($id): ?Model
-    {
+    public function find($id): ?Model {
         return $this->model->find($id);
     }
 }
