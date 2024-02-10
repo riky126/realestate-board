@@ -17,6 +17,7 @@ function ProprietorPage () {
     // window.PROPRIETORS in comming from laravel
     // code here...
     setupOptionsMenu();
+    setupDateFilter();
 }
 
 function setupOptionsMenu() {
@@ -92,6 +93,17 @@ function setupOptionsMenu() {
     });
 }
 
+function setupDateFilter() {
+    const dateField = document.querySelector('input[name=date-period]');
+
+    dateField.onblur = function(event) {
+        let url = window.location.origin + window.location.pathname;
+        const date = event.target.value;
+        url += date ? `?accounting-period=${date}` : '';
+
+        window.location.href = url;
+    }
+}
 
 
 

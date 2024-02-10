@@ -30,7 +30,7 @@
 
 <div class='date-field-group'>
   <label class='form-label'>Accounting period</label>
-  <input class='form-control' id="bday-month" type="month" name="bday-month" value="2024-02" />
+  <input class='form-control' id="bday-month" type="month" name="date-period" value="2024-02" />
 </div>
 
 <div class="container collection-list">

@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 /** External Imports */
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 /** Internal Imports */
 use App\Models\Proprietor;
 use App\Http\Requests\ProprietorRequest;
+use Illuminate\Http\Request;
 
 class ProprietorController extends Controller {
 
@@ -26,17 +28,28 @@ class ProprietorController extends Controller {
      *
      * @return \Illuminate\Http\HttpResponse
      */
-    public function show() {
+    public function show(Request $request) {
         
         $user = Auth::user();
-        $proprietors = $user->customer->corporation->proprietors;
-        $monthly_mentenace_budget = env('TOTAL_MAINTENANCE') / 12;
+        $corporation_id = $user->customer->corporation->id;
+        $proprietors = [];
+        
+        if( $request->has('accounting-period') ) {
+            $date = $request->query('accounting-period');
+            $proprietors = Proprietor::where('corporation_id',  $corporation_id)
+                            ->whereYear('created_at', '=', Carbon::parse($date)->format('Y'))->get();
 
+        }else {
+            $proprietors = $user->customer->corporation->proprietors;
+        } 
+        
+        $monthly_mentenace_budget = env('TOTAL_MAINTENANCE') / 12;
         $data = [
             'title' => 'Dashboard',
             'proprietors' => $proprietors,
             'monthly_mentenace_budget' => $monthly_mentenace_budget
         ];
+
         return view('pages.proprietors', $data);
     }
 
