@@ -2,13 +2,9 @@
 namespace App\Http\Controllers;
 
 /** External Imports */
-
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-
 /** Internal Imports */
 
 class AuthController extends Controller {

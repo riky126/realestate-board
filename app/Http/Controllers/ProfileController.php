@@ -2,13 +2,9 @@
 namespace App\Http\Controllers;
 
 /** External Imports */
-use Illuminate\Http\Request;
-use Illuminate\Support\MessageBag;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 /** Internal Imports */
-use App\Models\Corporation;
 
 class ProfileController extends Controller {
     

@@ -2,13 +2,10 @@
 namespace App\Http\Controllers;
 
 /** External Imports */
-use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 /** Internal Imports */
-use App\Models\User;
 use App\Models\Proprietor;
 use App\Http\Requests\ProprietorRequest;
 
@@ -91,7 +88,7 @@ class ProprietorController extends Controller {
             return back()
                    ->with('success', 'Successfully! created Proprietor');
 
-        }catch(Exception $e) {
+        }catch(\Exception $e) {
             return back()->withErrors([
                 'createError' => $e->getMessage(),
             ]);
@@ -127,7 +124,7 @@ class ProprietorController extends Controller {
             
             $request->flush();
             return back();
-        }catch(Exception $e) {
+        }catch(\Exception $e) {
             return back()->withErrors([
                 'updateError' => $e->getMessage(),
             ]);
