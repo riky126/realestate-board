@@ -1,11 +1,12 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary 
-{{ Auth::check() && Auth::user()->is_admin ? 'admin-nav': ''}}">
+{{ Auth::check() && Auth::user()->is_admin ? 'admin-nav': ''}}"
+ >
   <!-- Container wrapper -->
   <div class="container-fluid">
     
     <!-- Collapsible wrapper -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="navbarToggler01">
       <!-- Navbar brand -->
       <a class="navbar-brand mt-2 mt-lg-0 logo" href="#">
         <img
@@ -14,6 +15,15 @@
           loading="lazy"
         />
       </a>
+
+      <button 
+          class="navbar-toggler collapsed" type="button" 
+          data-bs-toggle="collapse" data-bs-target="#navbarToggler01" 
+          aria-controls="navbarToggler01" aria-expanded="false" 
+          aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
       @if (Auth::check())
         <!-- Customer links -->
         @if (!Auth::user()->is_admin)

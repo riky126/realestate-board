@@ -24,7 +24,6 @@ function setupSelectProprietors() {
         selectField.selectedIndex =0;
     }
 
-
     modelCloseButton.onclick = willCloseModel;
     modalContainer.onclick = willCloseModel;
 

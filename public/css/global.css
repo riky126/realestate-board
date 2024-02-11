@@ -271,10 +271,74 @@ form .form-group .form-label{
     }
 
     .navbar-expand-lg .navbar-collapse  {
-        display: flex !important;
-        flex-basis: auto;
+        /*display: flex;
+        flex-basis: auto;*/
     }
+
+    .collapse .navbar-nav {
+        display: none;
+    }
+
+    .navbar-collapse .navbar-toggler {
+        position: absolute;
+        top: 0.4rem;
+        left: 12rem;
+        padding: 0.1rem 0.2rem;
+        outline-width: 1px !important;
+    }
+
+    .navbar-collapse .navbar-toggler:active,
+    .navbar-collapse .navbar-toggler:focus {
+        outline-width: 1px !important;
+    }
+
+    .navbar-collapse + .profile-block {
+        position: absolute;
+        top: 0.8rem;
+        right: 1rem;
+    }
+
+    .collapse.show .navbar-nav {
+        display: flex;
+    }
+
+    .navbar-brand {
+        display: block;
+        margin-top: 0.15rem !important;
+    }
+
+    .navbar-nav {
+        padding: 0.8rem 2rem;
+    }
+    .navbar-collapse {
+        min-height: 2.3rem;
+    }
+    .collapse:not(.show) {
+        height: auto;
+        display: block;
+    }
+
     .navbar-expand-lg .navbar-nav {
-        flex-direction: row;
+       /* flex-direction: row; */
     }
+
+    .navbar .nav-link {
+        border: none;
+        border-radius: 0.3rem;
+    }
+
+    .navbar .nav-link:hover {
+        background-color: #f3f3f3;
+    }
+
+    .navbar .nav-link.active {
+        border: none;
+        font-weight: 700;
+    }
+}
+/*
+* Navbar mobile
+*/
+@media only screen and (max-width: 834px) {
+    
 }
