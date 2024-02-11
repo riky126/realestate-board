@@ -39,7 +39,7 @@
 }
 
 .table tr th:last-child,
-.table tr:hover th:last-child {
+.table tr:hover td:last-child {
     border-radius: 0rem 0.2rem 0.2rem  0rem;
 }
 
@@ -49,6 +49,10 @@
 
 .table tr:hover .contextmenu-block {
     display: block !important;
+}
+
+.table-hover > tbody > tr:hover > * {
+    --bs-table-bg-state: rgb(240, 240, 240);
 }
 
 .empty-row {
