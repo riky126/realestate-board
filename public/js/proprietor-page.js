@@ -44,8 +44,7 @@ function setupOptionsMenu() {
     function onUpdateCommand (event) {
         const rowId = event.currentTarget.getAttribute('data-row-id');
         proprietor = window.PROPRIETORS[rowId];
-        $form.action = `update-proprietor`;
-        submitButton.innerHTML = 'Update';
+        setModelToUpdate();
 
         // Rename proprietor attribute to match input fields name;
         proprietor.renameProperty('unit_entitlement', 'unit_ent');
@@ -87,9 +86,14 @@ function setupOptionsMenu() {
         }
     }
 
+    const setModelToUpdate = () => {
+        $form.action = `update-proprietor`;
+        submitButton.innerHTML = 'Update';
+    }
+
     const willCloseModel = (event) => {
         if(event.target !== event.currentTarget) return;
-        
+    
         $form.action = defaultformAction;
         submitButton.innerHTML = defaultButtonLabel;
         proprietor = null;
@@ -107,6 +111,10 @@ function setupOptionsMenu() {
     }
 
     $form.onsubmit = onSubmit;
+
+    if (window.MODAL_ERROR?.updateError) {
+        setModelToUpdate();
+    }
 
     modelCloseButton.addEventListener('click', willCloseModel);
     modalContainer.addEventListener('click', willCloseModel);

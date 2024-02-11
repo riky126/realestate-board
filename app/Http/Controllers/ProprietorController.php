@@ -122,12 +122,27 @@ class ProprietorController extends Controller {
      
         try {
             $proprietor = Proprietor::whereId($request->proprietor);
+            $existingProprietor = Proprietor::where('lot_number', $request->lot_number)
+                                            ->orWhere('email', $request->email)->first();
             
-            if ($proprietor != null) {
+            if ($proprietor == null) {
+                $request->request->add(['proprietor' => $proprietor->first()->id]);
                 return back()
                     ->withInput()
                     ->withErrors([
                         'existingUser' => 'Unable to update proprietor',
+                    ]);
+            }
+
+            if ($existingProprietor != null && (
+                $proprietor->first()->id != $existingProprietor->id ||
+                $proprietor->first()->email != $existingProprietor->email
+            )) {
+                $request->request->add(['proprietor' => $proprietor->first()->id]);
+                return back()
+                    ->withInput()
+                    ->withErrors([
+                        'updateError'  => 'Proprietor exist with lot#: '. $request->lot_number,
                     ]);
             }
 
