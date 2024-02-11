@@ -62,6 +62,29 @@ function setupOptionsMenu() {
 
     function onDeleteCommand (event) {
         event.preventDefault();
+       
+        const rowId = event.currentTarget.getAttribute('data-row-id');
+        const proprietor = window.PROPRIETORS[rowId];
+
+        const url = window.location.origin + window.location.pathname;
+        const csrfToken = document.querySelector('input[name=_token]')
+        const form = document.createElement("form");
+
+        
+        if (confirm(`Deleting Proprietor: ${proprietor.lot_number} will remove all there contributions.`)) {
+            form.action =  `${url}/delete-proprietor/${proprietor.id}`;
+            form.method = "post";
+            form.setAttribute('id', 'deleteForm')
+
+            const proprietorInput = document.createElement("input");
+            proprietorInput.value = proprietor.id;
+            proprietorInput.name = "proprietor_id";
+
+            form.appendChild(proprietorInput);
+            form.appendChild(csrfToken);
+            document.body.appendChild(form);
+            form.submit();
+        }
     }
 
     const willCloseModel = (event) => {

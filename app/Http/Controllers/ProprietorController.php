@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use App\Models\Proprietor;
 use App\Http\Requests\ProprietorRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProprietorController extends Controller {
 
@@ -63,8 +64,10 @@ class ProprietorController extends Controller {
         $user = Auth::user();
 
         try {
-            $existingProprietor = Proprietor::where('email', $request->email)
-            ->orWhere('corporation_id', $user->customer->corporation->id)->first();
+            $existingProprietor = Proprietor::where([
+                'email'          => $request->email,
+                'corporation_id' => $user->customer->corporation->id]
+                )->first();
 
             if ($existingProprietor != null) {
                 return back()
@@ -74,8 +77,10 @@ class ProprietorController extends Controller {
                     ]);
             }
 
-            $existingProprietor = Proprietor::where('lot_number', $request->lot_number)
-            ->orWhere('corporation_id', $user->customer->corporation->id)->first();
+            $existingProprietor = Proprietor::where([
+                'lot_number'     => $request->lot_number,
+                'corporation_id' => $user->customer->corporation->id
+                ])->first();
 
             if ($existingProprietor != null) {
                 return back()
@@ -118,7 +123,7 @@ class ProprietorController extends Controller {
         try {
             $proprietor = Proprietor::whereId($request->proprietor);
             
-            if ($proprietor == null) {
+            if ($proprietor != null) {
                 return back()
                     ->withInput()
                     ->withErrors([
@@ -144,6 +149,27 @@ class ProprietorController extends Controller {
                 ->withInput()
                 ->withErrors([
                 'updateError' => $e->getMessage(),
+            ]);
+        }
+    }
+
+
+    /**
+     * Update new Proprietor.
+     *
+     * @return \Illuminate\Http\HttpResponse
+     */
+    public function delete(Request $request, MessageBag $error) {
+        try {
+            $proprietor = Proprietor::whereId($request->proprietor_id);
+            $proprietor->delete();
+            $this->calculateMonthlyFee($request->unit_ent, $proprietor);
+
+            $request->flush();
+            return back();
+        }catch(\Exception $e) {
+            return back()->withErrors([
+                'deleteError' => $e->getMessage(),
             ]);
         }
     }

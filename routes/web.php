@@ -63,6 +63,10 @@ Route::group(['middleware' => ['auth', 'auth.admin']], function () {
     Route::post('/create-proprietor', [ProprietorController::class, 'create'])->name('create-proprietor');
     Route::post('/update-proprietor', [ProprietorController::class, 'update'])->name('update-proprietor');
     Route::post('/create-contribution', [ContributionController::class, 'create'])->name('create-contribution');
+
+    Route::post('/proprietors/delete-proprietor/{proprietorId}',
+        [ProprietorController::class, 'delete'])->name('delete-proprietor');
+
 });
 
 Route::group(['middleware' => ['auth', 'auth.admin']], function () {
