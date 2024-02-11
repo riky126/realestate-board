@@ -31,7 +31,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
      * @param  $email
      * @return mixed
      */
-    public function getUserByUserEmail(string $email): User {
+    public function getUserByUserEmail(string $email): ?User {
         return $this->model->where('email', $email)->first();
     }
 }

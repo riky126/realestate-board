@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 
 class PlanSeeder extends Seeder
@@ -13,6 +13,9 @@ class PlanSeeder extends Seeder
     public function run(): void
     {
         // \App\Models\Plan::factory(10)->create();
+        DB::statement('SET FOREIGN_KEY_CHECK=0');
+
+        DB::table('plans')->truncate();
 
         \App\Models\Plan::factory()->create([
             'name'                  =>  'Basic',
@@ -29,5 +32,7 @@ class PlanSeeder extends Seeder
             'duration_in_months'    =>  12,
             'discount'              =>  18.0
         ]);
+
+        DB::statement('SET FOREIGN_KEY_CHECK=1');
     }
 }
