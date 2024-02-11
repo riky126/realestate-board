@@ -135,11 +135,14 @@
 			</index>
 		</table>
 		<table name="payments" >
-			<column name="id" type="bigint" jt="-5" mandatory="y" autoincrement="y" />
+			<column name="id" type="bigint" length="19" decimal="0" jt="-5" mandatory="y" />
 			<column name="amount" type="decimal" length="9" decimal="2" jt="3" />
 			<column name="subscription_id" type="bigint" jt="-5" unsigned="y" />
 			<index name="pk_payments_id" unique="PRIMARY_KEY" >
 				<column name="id" />
+			</index>
+			<index name="fk_payments_subscriptions" unique="NORMAL" >
+				<column name="subscription_id" />
 			</index>
 			<fk name="fk_payments_subscriptions" to_schema="realestate_board" to_table="subscriptions" >
 				<fk_column name="subscription_id" pk="id" />
@@ -250,9 +253,10 @@
 		</table>
 		<table name="users" >
 			<column name="id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="first_name" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="last_name" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
 			<column name="email" type="varchar" length="255" jt="12" mandatory="y" />
 			<column name="password" type="varchar" length="255" jt="12" mandatory="y" />
-			<column name="name" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
 			<column name="email_verified_at" type="timestamp" length="19" decimal="0" jt="93" />
 			<column name="remember_token" type="varchar" length="100" decimal="0" jt="12" />
 			<column name="created_at" type="timestamp" length="19" decimal="0" jt="93" />
