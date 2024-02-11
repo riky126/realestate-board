@@ -126,13 +126,20 @@ function setupOptionsMenu() {
 
 function setupDateFilter() {
     const dateField = document.querySelector('input[name=date-period]');
+    let oldValue = null;
+
+    dateField.onfocus = function(event) {
+        oldValue = event.target.value;
+    }
 
     dateField.onblur = function(event) {
         let url = window.location.origin + window.location.pathname;
         const date = event.target.value;
         url += date ? `?accounting-period=${date}` : '';
 
-        window.location.href = url;
+        //Old make request if value changes
+        if (oldValue !== date) 
+            window.location.href = url;
     }
 }
 

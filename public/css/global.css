@@ -270,21 +270,21 @@ form .form-group .form-label{
         max-width: 100%;
     }
 
-    .navbar-expand-lg .navbar-collapse  {
-        /*display: flex;
-        flex-basis: auto;*/
-    }
-
     .collapse .navbar-nav {
         display: none;
     }
 
     .navbar-collapse .navbar-toggler {
         position: absolute;
-        top: 0.5rem;
+        top: 0.7rem;
         left: 12rem;
         padding: 0.1rem 0.2rem;
         outline-width: 1px !important;
+    }
+
+    .navbar-collapse .navbar-toggler-icon {
+        width: 1.2em;
+        height: 1.2em;
     }
 
     .navbar-collapse .navbar-toggler:active,
