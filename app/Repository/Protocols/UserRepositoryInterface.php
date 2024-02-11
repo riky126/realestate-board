@@ -7,5 +7,5 @@ use Illuminate\Support\Collection;
 interface UserRepositoryInterface {
    public function all(): Collection;
 
-   public function getUserByUserEmail(string $email): User;
+   public function getUserByUserEmail(string $email): ?User;
 }
