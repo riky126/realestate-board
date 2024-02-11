@@ -69,9 +69,9 @@ function setupOptionsMenu() {
         const url = window.location.origin + window.location.pathname;
         const csrfToken = document.querySelector('input[name=_token]')
         const form = document.createElement("form");
-
+        const confirmMessage = `Deleting Proprietor: ${proprietor.lot_number} will remove all their contributions.`;
         
-        if (confirm(`Deleting Proprietor: ${proprietor.lot_number} will remove all there contributions.`)) {
+        if (confirm(confirmMessage)) {
             form.action =  `${url}/delete-proprietor/${proprietor.id}`;
             form.method = "post";
             form.setAttribute('id', 'deleteForm')
