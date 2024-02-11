@@ -134,6 +134,18 @@
 				<column name="email" />
 			</index>
 		</table>
+		<table name="payments" >
+			<column name="id" type="bigint" jt="-5" mandatory="y" autoincrement="y" />
+			<column name="amount" type="decimal" length="9" decimal="2" jt="3" />
+			<column name="subscription_id" type="bigint" jt="-5" unsigned="y" />
+			<index name="pk_payments_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_payments_subscriptions" to_schema="realestate_board" to_table="subscriptions" >
+				<fk_column name="subscription_id" pk="id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
 		<table name="personal_access_tokens" >
 			<column name="id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="tokenable_type" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
@@ -265,8 +277,9 @@
 		<entity schema="realestate_board" name="failed_jobs" color="3986C1" x="240" y="192" />
 		<entity schema="realestate_board" name="migrations" color="3986C1" x="416" y="192" />
 		<entity schema="realestate_board" name="password_reset_tokens" color="3986C1" x="576" y="192" />
-		<entity schema="realestate_board" name="personal_access_tokens" color="3986C1" x="800" y="144" />
-		<entity schema="realestate_board" name="plans" color="3986C1" x="880" y="448" />
+		<entity schema="realestate_board" name="payments" color="C1D8EE" x="896" y="640" />
+		<entity schema="realestate_board" name="personal_access_tokens" color="3986C1" x="800" y="176" />
+		<entity schema="realestate_board" name="plans" color="3986C1" x="896" y="432" />
 		<entity schema="realestate_board" name="proprietors" color="C1D8EE" x="320" y="800" />
 		<entity schema="realestate_board" name="subscriptions" color="3986C1" x="656" y="384" />
 		<entity schema="realestate_board" name="users" color="C1D8EE" x="160" y="368" />
