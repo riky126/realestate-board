@@ -54,19 +54,20 @@ class DashboardController extends Controller {
     protected function customer() {
         $user = Auth::user();
         $corporation = $user->customer->corporation;
+        $contributions_count = $user->customer->corporation->contributions->count();
         $proprietors = $corporation->proprietors;
 
         $contributions = Contribution::orderBy('created_at', 'desc')
                     ->with('proprietor')
                     ->where('corporation_id', '=', $corporation->id)
-                    ->take(10)
+                    ->take(5)
                     ->get();
 
         $mentenance_budget = env('TOTAL_MAINTENANCE');
         $stats = [
             'total_contributions' => $contributions->sum('amount'),
-            'contributions_count' => $contributions->count(),
             'proprietors_count'   => $proprietors->count(),
+            'contributions_count' => $contributions_count,
             'total_units'   => $proprietors->sum('unit_entitlement')
         ];
 
