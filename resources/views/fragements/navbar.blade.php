@@ -70,7 +70,7 @@
       <!-- Icon -->
       @auth
         <a class="text-reset me-3 user-greeting" href="#">
-          <span>Hi {{  explode(' ',Auth::user()->name)[0] }}!</span>
+          <span>Hi {{ Auth::user()->first_name }}!</span>
         </a>
       @endauth
 

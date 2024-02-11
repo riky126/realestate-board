@@ -16,7 +16,7 @@
                         <div class="user-avatar">
                             <img src="{{ URL::asset('images/profile-icon.svg') }}" alt="Maxwell Admin">
                         </div>
-                        <h5 class="user-name">{{ $user->name }}</h5>
+                        <h5 class="user-name">{{ $user->first_name }} {{ $user->last_name }}</h5>
                         <h6 class="user-email">{{ $user->email }}</h6>
                         <h6 class="user-email">{{ $user->type }}</h6>
                     </div>
@@ -39,9 +39,16 @@
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                         <div class="form-group">
-                            <label for="fullName">Full Name</label>
-                            <input value=" {{ $user->name }}" type="text" 
-                                    class="form-control" id="fullName" placeholder="Enter full name">
+                            <label for="firstName">First Name</label>
+                            <input value=" {{ $user->first_name }}" type="text" 
+                                    class="form-control" id="firstName" placeholder="Enter first name">
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input  value={{ $user->last_name }} type="url" 
+                                class="form-control" id="lastName" placeholder="Enter last name">
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -49,19 +56,13 @@
                             <label for="eMail">Email</label>
                             <input type="email" 
                                     value="{{ $user->email }}"
-                                    class="form-control" id="eMail" placeholder="Enter email ID">
+                                    class="form-control" id="eMail" placeholder="Enter email">
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                         <div class="form-group">
                             <label for="phone">Phone</label>
                             <input type="text" class="form-control" id="phone" placeholder="Enter phone number">
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                        <div class="form-group">
-                            <label for="website">Website URL</label>
-                            <input type="url" class="form-control" id="website" placeholder="Website url">
                         </div>
                     </div>
                 </div>
