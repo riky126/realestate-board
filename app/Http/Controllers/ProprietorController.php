@@ -46,7 +46,7 @@ class ProprietorController extends Controller {
         
         $monthly_mentenace_budget = env('TOTAL_MAINTENANCE') / 12;
         $data = [
-            'title' => 'Dashboard',
+            'title' => 'Proprietors',
             'proprietors' => $proprietors,
             'monthly_mentenace_budget' => $monthly_mentenace_budget
         ];
