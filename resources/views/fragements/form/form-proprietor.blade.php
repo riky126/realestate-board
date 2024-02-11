@@ -18,7 +18,7 @@
                         class="form-control" placeholder="John" required autofocus>
                 <input type="text" name="last_name" id="inputLastName"
                         value="{{ old('last_name') }}"
-                        class="form-control" placeholder="Joe" required autofocus>
+                        class="form-control" placeholder="Doe" required autofocus>
             </div>
 
             <div class='form-group'>
