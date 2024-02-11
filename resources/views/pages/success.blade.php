@@ -19,7 +19,7 @@
         </div>
         <div class="text-center">
             <h1>Thank You !</h1>
-            <p>You Account is now activated. Login with you email and password.</p>
+            <p>Your Account is now activated. Login with you email and password.</p>
             <a href="{{ url('login') }}" class="btn btn-lg btn-primary btn-block flexible">Go to Login</a>
         </div>
     </div>

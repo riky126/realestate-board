@@ -7,7 +7,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Show a second modal and hide this one with the button below.
+        A proprietor maintenace fee will be calculated using # of Unit.
         @include('fragements/form/form-proprietor')
       </div>
     </div>

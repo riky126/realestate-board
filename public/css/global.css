@@ -279,6 +279,7 @@ form .form-group .form-label{
         top: 0.7rem;
         left: 12rem;
         padding: 0.1rem 0.2rem;
+        border-radius: 0.2rem;
         outline-width: 1px !important;
     }
 
