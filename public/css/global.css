@@ -251,6 +251,10 @@ form .form-group .form-label{
     line-height: normal;
 }
 
+.modal-content {
+    border: 1px solid white;
+}
+
 .footer {
     display: block;
     text-align: center;
