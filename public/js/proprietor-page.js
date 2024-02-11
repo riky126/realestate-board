@@ -73,7 +73,7 @@ function setupOptionsMenu() {
         if (confirm(confirmMessage)) {
             form.action =  `${url}/delete-proprietor/${proprietor.id}`;
             form.method = "post";
-            form.setAttribute('id', 'deleteForm')
+            form.setAttribute('id', 'deleteForm');
 
             const proprietorInput = document.createElement("input");
             proprietorInput.value = proprietor.id;
@@ -103,7 +103,7 @@ function setupOptionsMenu() {
     const onSubmit = () => {
         if (!proprietor) return;
 
-        input = document.createElement('input');
+        const input = document.createElement('input');
         input.setAttribute('name', 'proprietor');
         input.setAttribute('value', proprietor.id);
         input.setAttribute('type', 'hidden');
