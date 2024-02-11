@@ -38,7 +38,7 @@
               <span class='lg-badge'>#{{ $customer->corporation->number }}</span>
               {{ $customer->corporation->name }}
             </td>
-            <td>{{ $customer->user->name }}</td>
+            <td>{{ $customer->user->first_name }} {{ $customer->user->last_name }}</td>
             <td>{{ $customer->user->email }}</td>
             <td>{{ $customer->created_at }}</td>
           </tr>
