@@ -56,6 +56,10 @@
 
         </div>
     </section>
+    @if (old('proprietor'))
+        <input type="hidden" name="proprietor" id="inputProprietor"
+            value="{{ old('proprietor') }}">
+    @endif
 
     <button class="btn btn-lg btn-primary btn-block flexible" type="submit">Create</button>
 </form>
