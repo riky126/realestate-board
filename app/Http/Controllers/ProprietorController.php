@@ -46,7 +46,7 @@ class ProprietorController extends Controller {
         
         $monthly_mentenace_budget = env('TOTAL_MAINTENANCE') / 12;
         $data = [
-            'title' => 'Dashboard',
+            'title' => 'Proprietors',
             'proprietors' => $proprietors,
             'monthly_mentenace_budget' => $monthly_mentenace_budget
         ];
@@ -198,8 +198,7 @@ class ProprietorController extends Controller {
         
         $user = Auth::user();
         $proprietors = $user->customer->corporation->proprietors;
-        
-       
+
         $total_entitlement =  $update_proprietor == null ? $proprietors->sum('unit_entitlement') + $unit_ent :
                               $proprietors->sum('unit_entitlement');
 
