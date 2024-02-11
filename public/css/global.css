@@ -281,7 +281,7 @@ form .form-group .form-label{
 
     .navbar-collapse .navbar-toggler {
         position: absolute;
-        top: 0.4rem;
+        top: 0.5rem;
         left: 12rem;
         padding: 0.1rem 0.2rem;
         outline-width: 1px !important;
@@ -316,10 +316,6 @@ form .form-group .form-label{
     .collapse:not(.show) {
         height: auto;
         display: block;
-    }
-
-    .navbar-expand-lg .navbar-nav {
-       /* flex-direction: row; */
     }
 
     .navbar .nav-link {
