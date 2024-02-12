@@ -51,4 +51,8 @@ class Corporation extends Model
         return $this->hasMany(Contribution::class);
     }
 
+    public function budget() {
+        return $this->hasOne(Budget::class);
+    }
+
 }

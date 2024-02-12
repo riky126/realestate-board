@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Contribution extends Model
+class Budget extends Model
 {
     use HasFactory;
 
-    protected $table = 'contributions';
+    protected $table = 'budgets';
 
     /**
      * The attributes that are mass assignable.
@@ -17,20 +17,9 @@ class Contribution extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'amount',
-        'created_at'
+        'total_maintenance'
     ];
 
-    /**
-     * Get the phone associated with the proprietor.
-     */
-    public function proprietor() {
-        return $this->belongsTo(Proprietor::class);
-    }
-
-    /**
-     * Get the phone associated with the proprietor.
-     */
     public function corporation() {
         return $this->belongsTo(Corporation::class);
     }
