@@ -207,7 +207,7 @@ class ProprietorController extends Controller {
         $total_entitlement =  $update_proprietor == null ? $proprietors->sum('unit_entitlement') + $unit_ent :
                               $proprietors->sum('unit_entitlement');
 
-        $total_maintenance = $budget = $budget->total_maintenance; //env('TOTAL_MAINTENANCE');
+        $total_maintenance = $budget->total_maintenance; //env('TOTAL_MAINTENANCE');
         $monthly_fee = $this->calculateFee($total_maintenance, $unit_ent, $total_entitlement);
 
         foreach($proprietors as $proprietor) {
