@@ -53,6 +53,9 @@ class DashboardController extends Controller {
 
     protected function customer() {
         $user = Auth::user();
+        
+        $budget = $user->customer->corporation->budget;
+        
         $corporation = $user->customer->corporation;
         $contributions_count = $user->customer->corporation->contributions->count();
         $proprietors = $corporation->proprietors;
@@ -63,7 +66,7 @@ class DashboardController extends Controller {
                     ->take(5)
                     ->get();
 
-        $mentenance_budget = env('TOTAL_MAINTENANCE');
+        $mentenance_budget = $budget->total_maintenance; // env('TOTAL_MAINTENANCE');
         $stats = [
             'total_contributions' => $contributions->sum('amount'),
             'proprietors_count'   => $proprietors->count(),

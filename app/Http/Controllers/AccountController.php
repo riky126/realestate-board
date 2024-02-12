@@ -12,6 +12,7 @@ use App\Models\Account;
 use App\Models\Customer;
 use App\Models\Corporation;
 use App\Models\Subscription;
+use App\Models\Budget;
 use App\Models\User;
 
 use App\Repository\Protocols\UserRepositoryInterface;
@@ -43,7 +44,7 @@ class AccountController extends Controller {
     public function show() {
         
         $plans = Plan::all();
-        
+
         $data = [
             'title' => 'Create Account',
             'plans' => $plans,
@@ -127,6 +128,11 @@ class AccountController extends Controller {
                 $corporation->account_id = $account->id;
                 $corporation->save();
 
+                $budget = new Budget();
+                $budget->total_maintenance = $this->randomDecimal(10000, 200000, 2);
+                $budget->corporation_id = $corporation->id;
+                $budget->save();
+
                 DB::commit();
                 //to put the posted data to session
                 $request->flash();
@@ -164,5 +170,16 @@ class AccountController extends Controller {
      */
     public function getPlanById($id) {
         return Plan::find($id);
+    }
+
+    /**
+ * @param float $min
+ * @param float $max
+ * @param int $digit
+ * @return float|int
+ */
+    public function randomDecimal(float $min, float $max, int $digit = 2): float|int
+    {
+        return mt_rand($min * 10, $max * 10) / 10;
     }
 }

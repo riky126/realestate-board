@@ -32,7 +32,10 @@ class ProprietorController extends Controller {
     public function show(Request $request) {
         
         $user = Auth::user();
+
         $corporation_id = $user->customer->corporation->id;
+        $budget = $user->customer->corporation->budget;
+
         $proprietors = [];
         
         if( $request->has('accounting-period') ) {
@@ -42,9 +45,9 @@ class ProprietorController extends Controller {
 
         }else {
             $proprietors = $user->customer->corporation->proprietors;
-        } 
+        }
         
-        $monthly_mentenace_budget = env('TOTAL_MAINTENANCE') / 12;
+        $monthly_mentenace_budget = $budget->total_maintenance / 12;
         $data = [
             'title' => 'Proprietors',
             'proprietors' => $proprietors,
@@ -197,12 +200,14 @@ class ProprietorController extends Controller {
     protected function calculateMonthlyFee ($unit_ent, $update_proprietor) {
         
         $user = Auth::user();
+
+        $budget = $user->customer->corporation->budget;
         $proprietors = $user->customer->corporation->proprietors;
 
         $total_entitlement =  $update_proprietor == null ? $proprietors->sum('unit_entitlement') + $unit_ent :
                               $proprietors->sum('unit_entitlement');
 
-        $total_maintenance = env('TOTAL_MAINTENANCE');
+        $total_maintenance = $budget = $budget->total_maintenance; //env('TOTAL_MAINTENANCE');
         $monthly_fee = $this->calculateFee($total_maintenance, $unit_ent, $total_entitlement);
 
         foreach($proprietors as $proprietor) {
