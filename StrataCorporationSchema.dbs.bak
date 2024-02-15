@@ -29,6 +29,22 @@
 			</fk>
 			<options><![CDATA[engine=InnoDB]]></options>
 		</table>
+		<table name="budgets" >
+			<column name="id" type="bigint" length="19" decimal="0" jt="-5" mandatory="y" autoincrement="y" />
+			<column name="total_maintenance" type="decimal" length="10" decimal="0" jt="3" mandatory="y" />
+			<column name="corporation_id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" />
+			<column name="created_at" type="datetime" length="19" decimal="0" jt="93" />
+			<column name="updated_at" type="datetime" length="19" decimal="0" jt="93" />
+			<index name="pk_budgets" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="corporation_budget_fk" unique="NORMAL" >
+				<column name="corporation_id" />
+			</index>
+			<fk name="corporation_budget_fk" to_schema="realestate_board" to_table="corporations" delete_action="restrict" update_action="cascade" >
+				<fk_column name="corporation_id" pk="id" />
+			</fk>
+		</table>
 		<table name="contributions" >
 			<column name="id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="amount" type="decimal" length="9" decimal="2" jt="3" mandatory="y" />
@@ -135,11 +151,14 @@
 			</index>
 		</table>
 		<table name="payments" >
-			<column name="id" type="bigint" jt="-5" mandatory="y" autoincrement="y" />
+			<column name="id" type="bigint" length="19" decimal="0" jt="-5" mandatory="y" />
 			<column name="amount" type="decimal" length="9" decimal="2" jt="3" />
 			<column name="subscription_id" type="bigint" jt="-5" unsigned="y" />
 			<index name="pk_payments_id" unique="PRIMARY_KEY" >
 				<column name="id" />
+			</index>
+			<index name="fk_payments_subscriptions" unique="NORMAL" >
+				<column name="subscription_id" />
 			</index>
 			<fk name="fk_payments_subscriptions" to_schema="realestate_board" to_table="subscriptions" >
 				<fk_column name="subscription_id" pk="id" />
@@ -250,9 +269,10 @@
 		</table>
 		<table name="users" >
 			<column name="id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="first_name" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="last_name" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
 			<column name="email" type="varchar" length="255" jt="12" mandatory="y" />
 			<column name="password" type="varchar" length="255" jt="12" mandatory="y" />
-			<column name="name" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
 			<column name="email_verified_at" type="timestamp" length="19" decimal="0" jt="93" />
 			<column name="remember_token" type="varchar" length="100" decimal="0" jt="12" />
 			<column name="created_at" type="timestamp" length="19" decimal="0" jt="93" />
@@ -271,9 +291,10 @@
 	<connector name="MySql" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-8.0.19.jar" driver_desc="Standard" host="localhost" port="3306" instance="realestate_board" user="docker" passwd="ZG9ja2Vy" />
 	<layout name="Default Layout" id="Layout_1f15" show_relation="columns" >
 		<entity schema="realestate_board" name="accounts" color="C1D8EE" x="416" y="368" />
+		<entity schema="realestate_board" name="budgets" color="3986C1" x="832" y="784" />
 		<entity schema="realestate_board" name="contributions" color="3986C1" x="592" y="864" />
 		<entity schema="realestate_board" name="corporations" color="3986C1" x="592" y="624" />
-		<entity schema="realestate_board" name="customers" color="3986C1" x="144" y="656" />
+		<entity schema="realestate_board" name="customers" color="3986C1" x="160" y="656" />
 		<entity schema="realestate_board" name="failed_jobs" color="3986C1" x="240" y="192" />
 		<entity schema="realestate_board" name="migrations" color="3986C1" x="416" y="192" />
 		<entity schema="realestate_board" name="password_reset_tokens" color="3986C1" x="576" y="192" />
